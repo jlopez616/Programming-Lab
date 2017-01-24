@@ -18,8 +18,26 @@ public class DateDistance {
     /**
      * Returns the number of days in the given month in the given year.
      */
-    public static long daysInMonth ( long month, long year ) {
-        return -1; // TODO: Finish this method!
+    public static long daysInMonth ( long month, long year) {
+        switch ((int)month) {
+            case 1: return 31;
+            case 2: if (isLeapYear(year)) {
+                        return 29;
+                    } else {
+                        return 28;
+                    }
+            case 3: return 31;
+            case 4: return 30;
+            case 5: return 31;
+            case 6: return 30;
+            case 7: return 31;
+            case 8: return 31;
+            case 9: return 30;
+            case 10: return 31;
+            case 11: return 30;
+            case 12: return 31;
+            default: return 0;
+            }
     }
 
     /**
@@ -53,7 +71,9 @@ public class DateDistance {
     }
 
     public static void main ( String[] args ) {
-        long year = Integer.parseInt(args[0]);
-        System.out.println(isLeapYear(year));
+        long month = Integer.parseInt(args[0]);
+        long year = Integer.parseInt(args[1]);
+        System.out.println(daysInMonth(month, year));
+
     }
 }
