@@ -44,7 +44,8 @@ public class DateDistance {
      * Returns whether the given date is a valid date.
      */
     public static boolean isValidDate ( long day, long month, long year ) {
-        if ( day <= daysInMonth(month, year) && month <= 12 && month > 0) {
+        if ( day <= daysInMonth(month, year) && day > 0 && month <= 12
+        && month > 0 && year > 0) {
             return true;
         } else {
             return false;
@@ -55,9 +56,41 @@ public class DateDistance {
      * Returns the number of days between the two provided dates, regardless of
      * the order they were provided.
      */
+
     public static long daysBetween ( long day0, long month0, long year0,
             long day1, long month1, long year1 ) {
-        long daysInYear0 = 0;
+            /*while (year0 != year1) {
+                while (month0 != month1) {
+                    while (day0 != day1) {
+                        if (day0 < day1) {
+                            day0++;
+                        } else {
+                            day0--;
+                        }
+                    }
+                    if (month0 < month1) {
+                        month0++;
+                    } else {
+                        month0--;
+                    }
+                }
+                if (year0 < year1) {
+                    year0++;
+                } else {
+                    year0--;
+                }
+            }*/
+            while (day0 != day1) {
+                if (day0 < day1) {
+                    day0++;
+                } else {
+                    day0--;
+                }
+
+            System.out.println(year0 + ", " + month0 + ", " + day0);
+
+        }
+        /*long daysInYear0 = 0;
         long daysInYear1 = 0;
         for (int i = 0; i < month0; i++) {
             daysInYear0 = daysInYear0 + daysInMonth(i, year0);
@@ -65,11 +98,9 @@ public class DateDistance {
         for (int j = 0; j < month1; j++) {
             daysInYear1 = daysInYear1 + daysInMonth(j, year1);
         }
-}
         daysInYear0 = daysInYear0 + day0 + (year0 * 365);
         daysInYear1 = daysInYear1 + day1 + (year1 * 365);
-        return Math.abs(daysInYear0 - daysInYear1);
-    }
+        return Math.abs(daysInYear0 - daysInYear1);  */
 
 //determine which goes first
 //eitehr recursively or with loop, make the bigger one go down by one
@@ -116,13 +147,13 @@ public class DateDistance {
     }
 
     public static void main ( String[] args ) {
-        long day = Integer.parseInt(args[0]);
-        long month = Integer.parseInt(args[1]);
-        long year = Integer.parseInt(args[2]);
-//        long day1 = Integer.parseInt(args[3]);
-//        long month1 = Integer.parseInt(args[4]);
-//        long year1 = Integer.parseInt(args[5]);
-        System.out.println(longformDate(day, month, year));
+        long day0 = Integer.parseInt(args[0]);
+        long month0 = Integer.parseInt(args[1]);
+        long year0 = Integer.parseInt(args[2]);
+        long day1 = Integer.parseInt(args[3]);
+        long month1 = Integer.parseInt(args[4]);
+        long year1 = Integer.parseInt(args[5]);
+        System.out.println(daysBetween(day0, month0, year0, day1, month1, year1));
 
     }
 }
