@@ -57,8 +57,29 @@ public class DateDistance {
      * the order they were provided.
      */
 
+    public static boolean isBigger(long valueOne, long valueTwo) {
+        if (valueOne < valueTwo) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static long totalDays(long day, long month, long year) {
+        long totalDaysInYear = 0;
+        for (int i = 0; i < month; i++) {
+            totalDaysInYear = totalDaysInYear + daysInMonth(i, year);
+        }
+        return totalDaysInYear + day;
+    }
     public static long daysBetween ( long day0, long month0, long year0,
             long day1, long month1, long year1 ) {
+        if (isBigger(year0, year1) && isBigger(totalDays(day0, month0, year0), totalDays(day1, month1, year1))) {
+            return 69;
+}
+
+
+
             /*while (year0 != year1) {
                 while (month0 != month1) {
                     while (day0 != day1) {
@@ -89,7 +110,10 @@ public class DateDistance {
 
             System.out.println(year0 + ", " + month0 + ", " + day0);
 
+
         }
+        return 50;
+    }
         /*long daysInYear0 = 0;
         long daysInYear1 = 0;
         for (int i = 0; i < month0; i++) {
