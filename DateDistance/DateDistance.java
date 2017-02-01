@@ -58,7 +58,7 @@ public class DateDistance {
      */
 
     public static boolean isBigger(long valueOne, long valueTwo) {
-        if (valueOne < valueTwo) {
+        if (valueOne > valueTwo) {
             return true;
         } else {
             return false;
@@ -72,11 +72,36 @@ public class DateDistance {
         }
         return totalDaysInYear + day;
     }
+
     public static long daysBetween ( long day0, long month0, long year0,
             long day1, long month1, long year1 ) {
-        if (isBigger(year0, year1) && isBigger(totalDays(day0, month0, year0), totalDays(day1, month1, year1))) {
-            return 69;
-}
+        long daysInBetween = 0;
+        if (/*isBigger(year0, year1) && */isBigger(totalDays(day0, month0, year0), totalDays(day1, month1, year1))) {
+            long tempDay = day0;
+            long tempMonth = month0;
+            long tempYear = year0;
+            day0 = day1;
+            month0 = month1;
+            year0 = year1;
+            day1 = tempDay;
+            month1 = tempMonth;
+            year1 = tempYear;
+        }
+        while ((month0 < month1) || (day0 < day1) || (year0 < year1)){
+                System.out.println("Day0: " + day0 + "Day1: " + day1 + "Month0: " + month0 + "Month1: "+ month1 + "Year0" + year0 + "year1" + year1);
+                day0++;
+                daysInBetween++;
+            if (day0 > daysInMonth(month0, year0)){
+                month0++;
+                day0 = 1;
+                if (month0 > 13) {
+                    month0 = 1;
+                    day0 = 1;
+                    year0++;
+                }
+            }
+        }
+        return daysInBetween;
 
 
 
@@ -100,7 +125,7 @@ public class DateDistance {
                 } else {
                     year0--;
                 }
-            }*/
+            }
             while (day0 != day1) {
                 if (day0 < day1) {
                     day0++;
@@ -112,7 +137,7 @@ public class DateDistance {
 
 
         }
-        return 50;
+        return 50; */
     }
         /*long daysInYear0 = 0;
         long daysInYear1 = 0;
