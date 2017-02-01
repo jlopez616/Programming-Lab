@@ -76,7 +76,7 @@ public class DateDistance {
     public static long daysBetween ( long day0, long month0, long year0,
             long day1, long month1, long year1 ) {
         long daysInBetween = 0;
-        if (/*isBigger(year0, year1) && */isBigger(totalDays(day0, month0, year0), totalDays(day1, month1, year1))) {
+        if (isBigger(year0, year1) || isBigger(totalDays(day0, month0, year0), totalDays(day1, month1, year1))) {
             long tempDay = day0;
             long tempMonth = month0;
             long tempYear = year0;
@@ -88,7 +88,7 @@ public class DateDistance {
             year1 = tempYear;
         }
         while ((month0 < month1) || (day0 < day1) || (year0 < year1)){
-                System.out.println("Day0: " + day0 + "Day1: " + day1 + "Month0: " + month0 + "Month1: "+ month1 + "Year0" + year0 + "year1" + year1);
+        //        System.out.println("Day0: " + day0 + "Day1: " + day1 + "Month0: " + month0 + "Month1: "+ month1 + "Year0" + year0 + "year1" + year1);
                 day0++;
                 daysInBetween++;
             if (day0 > daysInMonth(month0, year0)){
@@ -158,7 +158,7 @@ public class DateDistance {
      * Returns the day of the week the given date occured on as a String.
      */
     public static String dayOfTheWeek ( long day, long month, long year ) {
-        long dOTW = (day + ((13 * (month + 1)) / 5) + (year % 100) + ((year % 100)/4) + ((year/100)/4) + (5 * (year/100))) % 7;
+        long dOTW = (day + ((26 * (month + 1)) / 10) + (year % 100) + ((year % 100)/4) + ((year/100)/4) + (5 * (year/100))) % 7;
         switch((int)dOTW) {
             case 0: return "Saturday";
             case 1: return "Sunday";
@@ -202,7 +202,7 @@ public class DateDistance {
         long day1 = Integer.parseInt(args[3]);
         long month1 = Integer.parseInt(args[4]);
         long year1 = Integer.parseInt(args[5]);
-        System.out.println(daysBetween(day0, month0, year0, day1, month1, year1));
+        System.out.println("There are " + daysBetween(day0, month0, year0, day1, month1, year1) + "days between" + longformDate(day0, month0, year0) + " and " + longformDate(day1, month1, year1));
 
     }
 }
