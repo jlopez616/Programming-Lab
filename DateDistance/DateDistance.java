@@ -74,12 +74,13 @@ public class DateDistance {
     }
 
 
+
     public static long daysBetween ( long day0, long month0, long year0,
             long day1, long month1, long year1 ) {
         long daysInBetween = 0;
         if (isBigger(year0, year1) || isBigger(totalDays(day0, month0, year0),
             totalDays(day1, month1, year1))) {
-                if (year0 > year1) {
+                if ((year0 > year1) || (year0 == year1)) {
                     long tempDay = day0;
                     long tempMonth = month0;
                     long tempYear = year0;
@@ -91,6 +92,7 @@ public class DateDistance {
                     year1 = tempYear;
                 }
             }
+
         while ((year0 < year1) || (month0 < month1) || (day0 < day1)) {
             day0++;
             daysInBetween++;
