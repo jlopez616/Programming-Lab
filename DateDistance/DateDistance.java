@@ -73,8 +73,6 @@ public class DateDistance {
         return totalDaysInYear + day;
     }
 
-
-
     public static long daysBetween ( long day0, long month0, long year0,
             long day1, long month1, long year1 ) {
         long daysInBetween = 0;
@@ -112,21 +110,14 @@ public class DateDistance {
      * Returns the day of the week the given date occured on as a String.
      */
     public static String dayOfTheWeek ( long day, long month, long year ) {
-        long start = 0;
-
-        start = daysBetween(day, month, year, 1, 1, 1970);
+        long start = daysBetween(day, month, year, 1, 1, 1970) % 7;
         if (year < 1970) {
-            start = start % 7;
             start = 6 - start + 1;
             if (start > 6) {
                 start = 0;
             }
-
-        } else {
-            start = start % 7;
         }
         switch((int)start) {
-
             case 0: return "Thursday";
             case 1: return "Friday";
             case 2: return "Saturday";
@@ -138,10 +129,7 @@ public class DateDistance {
         }
     }
 
-    /**
-     * Returns the long form of the given date as a String.
-     */
-    public static String monthString (long month) {
+    public static String monthString (long month ) {
         switch((int)month) {
             case 1: return "January";
             case 2: return "February";
@@ -158,12 +146,17 @@ public class DateDistance {
             default: return "Invalid Date!";
         }
     }
+
+    /**
+     * Returns the long form of the given date as a String.
+     */
+
     public static String longformDate ( long day, long month, long year ) {
             return dayOfTheWeek(day, month, year) + ", " + day + " "
-            + monthString(month) + " " + year; // TODO: Finish this method!
+            + monthString(month) + " " + year;
     }
 
-    public static String plural(long daysBetween) {
+    public static String plural(long daysBetween ) {
         if (daysBetween != 1) {
             return "are " + daysBetween + " days ";
         } else {
@@ -172,16 +165,26 @@ public class DateDistance {
     };
 
     public static void main ( String[] args ) {
-        long day0 = Integer.parseInt(args[0]);
-        long month0 = Integer.parseInt(args[1]);
-        long year0 = Integer.parseInt(args[2]);
-        long day1 = Integer.parseInt(args[3]);
-        long month1 = Integer.parseInt(args[4]);
-        long year1 = Integer.parseInt(args[5]);
-        System.out.println("There " +
-        plural(daysBetween(day0, month0, year0, day1, month1, year1))
-        + "between " + longformDate(day0, month0, year0) + " and " +
-        longformDate(day1, month1, year1));
-
+        try {
+            long day0 = Integer.parseInt(args[0]);
+            long month0 = Integer.parseInt(args[1]);
+            long year0 = Integer.parseInt(args[2]);
+            long day1 = Integer.parseInt(args[3]);
+            long month1 = Integer.parseInt(args[4]);
+            long year1 = Integer.parseInt(args[5]);
+            if (isValidDate(day0, month0, year0) &&
+            isValidDate(day1, month1, year1)) {
+                System.out.println("There " +
+                plural(daysBetween(day0, month0, year0, day1, month1, year1))
+                + "between " + longformDate(day0, month0, year0) + " and " +
+                longformDate(day1, month1, year1) + "!");
+            } else {
+                System.out.println("Invalid date entered!");
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Usage instructions: java DateDistance "
+            + "<day0> <month0> <year0> <day1> <month1> <year1>");
+        }
     }
 }
