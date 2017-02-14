@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Arrays;
 /**
  * Deck represents a deck of playing cards using French suits that can be drawn
  * from and shuffled.
@@ -10,7 +11,7 @@ public class Deck {
 
     private int topCardIndex;
 
-    public static final int STANDARD_DECK_SIZE = 52; //TODO: Initialize this variable properly!
+    public static final int STANDARD_DECK_SIZE = 52;
 
     /**
      * Constructs an unshuffled standard 52 card deck using French suits.
@@ -92,8 +93,17 @@ public class Deck {
      *                       otherwise.
      */
     public boolean orderedEquals( Deck otherDeck ) {
-        //lolwhat
-        throw new UnsupportedOperationException();
+        boolean isSame = true;
+        cardIndex = 0;
+        for (int count = 0; count < otherDeck.cards.length; count++) {
+            if (this.cards[cardIndex] == otherDeck.cards[cardIndex]) {
+                isSame = true;
+            } else {
+                isSame = false;
+                break;
+            }
+        return isSame;
+        }
     }
 
     /**
@@ -103,8 +113,7 @@ public class Deck {
      * @return         the Card at the given index.
      */
     public Card getCardAt( int index ) {
-        return new Card(cards[index].getRank(), cards[index].getSuit());
-        //TODO: Complete this method!
+        return cards[index];
     }
 
     /**
@@ -115,15 +124,31 @@ public class Deck {
      * @param card        the Card to be inserted into the Deck
      */
     public void setCardAt( int index, Card card ) {
-        Card newCard = getCardAt(index);
-        newCard =  new Card(card.getRank(), card.getSuit());
+        cards[index] = card;
     }
 
     /**
      * Randomly reorders this deck, including any drawn cards.
      */
     public void shuffle() {
-        throw new UnsupportedOperationException();
+
+
+    /*    System.out.println("Pre-Shufle");
+        System.out.println(Arrays.toString(this.cards));
+        System.out.println(""); */
+        int cardIndex = 0;
+        for (int shuffles = 0; shuffles < cards.length; shuffles++) {
+            int randomIndex = (int)(Math.random() * cards.length);
+            Card placeHolder = getCardAt(cardIndex).copyCard();
+            Card switchCard = getCardAt(randomIndex).copyCard();
+            setCardAt(cardIndex, switchCard);
+            setCardAt(randomIndex, placeHolder);
+            cardIndex++;
+        }
+        /*System.out.println("Post-Shufle");
+        System.out.println(Arrays.toString(this.cards));
+        System.out.println("Pre-Shufle"); */
+        // throw new UnsupportedOperationException();
         //TODO: Complete this method!
     }
 
