@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Arrays;
 /**
  * Deck represents a deck of playing cards using French suits that can be drawn
  * from and shuffled.
@@ -27,7 +26,6 @@ public class Deck {
 
             }
         }
-        //TODO: Complete this method!
     }
 
     /**
@@ -54,7 +52,6 @@ public class Deck {
                 }
             }
         }
-        //TODO: Complete this method!
     }
 
     /**
@@ -77,9 +74,9 @@ public class Deck {
     public Card drawCardFromTop() {
 
         this.topCardIndex++;
-        /*if (this.topCardIndex > this.cardIndex) {
+        if (this.topCardIndex > this.cards.length) {
             throw new ArrayIndexOutOfBoundsException();
-        } */
+        }
         return new Card( cards[this.topCardIndex - 1].getRank(), cards[this.topCardIndex -1].getSuit());
     }
 
@@ -93,17 +90,15 @@ public class Deck {
      *                       otherwise.
      */
     public boolean orderedEquals( Deck otherDeck ) {
-        boolean isSame = true;
-        cardIndex = 0;
-        for (int count = 0; count < otherDeck.cards.length; count++) {
-            if (this.cards[cardIndex] == otherDeck.cards[cardIndex]) {
-                isSame = true;
-            } else {
-                isSame = false;
-                break;
-            }
-        return isSame;
+        if (this.cards.length != otherDeck.cards.length){
+            return false;
         }
+        for (int count = 0; count < otherDeck.cards.length; count++) {
+            if (!(this.getCardAt(count).equals(otherDeck.getCardAt(count)))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -115,6 +110,7 @@ public class Deck {
     public Card getCardAt( int index ) {
         return cards[index];
     }
+
 
     /**
      * Replaces the Card at the given index in this Deck with a copy of the
@@ -130,12 +126,8 @@ public class Deck {
     /**
      * Randomly reorders this deck, including any drawn cards.
      */
+
     public void shuffle() {
-
-
-    /*    System.out.println("Pre-Shufle");
-        System.out.println(Arrays.toString(this.cards));
-        System.out.println(""); */
         int cardIndex = 0;
         for (int shuffles = 0; shuffles < cards.length; shuffles++) {
             int randomIndex = (int)(Math.random() * cards.length);
@@ -145,11 +137,6 @@ public class Deck {
             setCardAt(randomIndex, placeHolder);
             cardIndex++;
         }
-        /*System.out.println("Post-Shufle");
-        System.out.println(Arrays.toString(this.cards));
-        System.out.println("Pre-Shufle"); */
-        // throw new UnsupportedOperationException();
-        //TODO: Complete this method!
     }
 
     /**
@@ -158,10 +145,13 @@ public class Deck {
      *
      * @return         <code>true</code> if this Deck is a standard 52-card deck
      *                 argument; <code>false</code> otherwise.
+
      */
     public boolean isStandardDeck() {
-        throw new UnsupportedOperationException();
-        //TODO: Complete this method!
+
+        Deck standardDeck = new Deck();
+        return this.equals(standardDeck);
+
     }
 
     /**
@@ -174,9 +164,10 @@ public class Deck {
     public String toString() {
         String basicString = "";
         for (int k = 0; k < this.cards.length; k++ ) {
+            basicString = basicString + getCardAt(k).toString();
 
         }
-        throw new UnsupportedOperationException();
+        return basicString;
         //TODO: Complete this method!
     }
 
