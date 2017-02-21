@@ -19,6 +19,9 @@ public class Hand {
      * @throws IllegalArgumentException    if an non-positive hand size is provided
      */
     public Hand( int handSize ) {
+        if (handSize <= 0) {
+            throw new IllegalArgumentException();
+        }
         this.cardsInHand = new Card[handSize];
     }
 
@@ -30,7 +33,9 @@ public class Hand {
      * @param deck     the number of cards the hand can hold
      */
     public void drawNewHandFrom( Deck deck ) {
-        throw new UnsupportedOperationException();
+        for (int cardsAmount = 0; cardsAmount < getHandSize(); cardsAmount++) {
+            cardsInHand[cardsAmount] = deck.drawCardFromTop();
+        }
         //TODO: Complete this method!
     }
 
@@ -40,7 +45,7 @@ public class Hand {
      * @return          the number of card this hand can hold
      */
     public int getHandSize() {
-        throw new UnsupportedOperationException();
+        return cardsInHand.length;
         //TODO: Complete this method!
     }
 
@@ -51,7 +56,8 @@ public class Hand {
      * @return          the card at the provided index in the hand
      */
     public Card getCardAt( int index ) {
-        throw new UnsupportedOperationException();
+        return cardsInHand[index];
+
         //TODO: Complete this method!
     }
 
@@ -63,7 +69,13 @@ public class Hand {
      */
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+       String basicString = "";
+        for (int k = 0; k < this.cardsInHand.length; k++ ) {
+            basicString = basicString + getCardAt(k).toString() + "\n";
+
+        }
+        System.out.println(basicString);
+        return basicString;
         //TODO: Complete this method!
     }
 
@@ -72,12 +84,19 @@ public class Hand {
      * provided card.
      *
      * @param card     the card being searched for
-     * @return         <code>true</code> if this hand contains an equivalent
+     * @return         <code>true</code> if this hand conta  ins an equivalent
      *                 card; <code>false</code> otherwise.
      */
     public boolean contains( Card card ) {
-        throw new UnsupportedOperationException();
-        //TODO: Complete this method!
+        Card tempCard = new Card();
+        boolean hasCard = false;
+        for (int k = 0; k < this.cardsInHand.length; k++ ) {
+            tempCard =  getCardAt(k);
+            if (tempCard.equals(card)) {
+                hasCard = true;
+            }
+        }
+        return hasCard;
     }
 
     /**
@@ -88,8 +107,13 @@ public class Hand {
      * @throws IllegalArgumentException    if an invalid rank is provided
      */
     public int countInHand( int rank ) {
-        throw new UnsupportedOperationException();
-        //TODO: Complete this method!
+        int rankCount = 0;
+        for (int k = 0; k < this.cardsInHand.length; k++ ) {
+            if (getCardAt(k).getRank() == rank) {
+                rankCount++;
+            }
+        }
+        return rankCount;
     }
 
     /**
@@ -99,8 +123,13 @@ public class Hand {
      * @return         the number of cards in the hand with the provided suit
      */
     public int countInHand( Card.Suit suit ) {
-        throw new UnsupportedOperationException();
-        //TODO: Complete this method!
+        int suitCount = 0;
+        for (int k = 0; k < this.cardsInHand.length; k++ ) {
+            if (getCardAt(k).getSuit() == suit) {
+                suitCount++;
+            }
+        }
+        return suitCount;
     }
 
     /**
@@ -110,7 +139,16 @@ public class Hand {
      * @return         the number of cards in the hand with face ranks
      */
     public int countOfFaceCards() {
-        throw new UnsupportedOperationException();
-        //TODO: Complete this method!
+        int faceCount = 0;
+        for (int k = 0; k < this.cardsInHand.length; k++) {
+            if (getCardAt(k).getRank() == 11) {
+                faceCount++;
+            } else if (getCardAt(k).getRank() == 12) {
+                faceCount++;
+            } else if (getCardAt(k).getRank() == 13) {
+                faceCount++;
+            }
+        }
+        return faceCount;
     }
 }
