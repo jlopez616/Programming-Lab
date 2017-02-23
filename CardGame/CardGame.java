@@ -67,6 +67,14 @@ public class CardGame {
             enemyRoundScore = enemyRoundScore + 15;
         }
 
+
+        System.out.println("Player Hand: " + playerHand.toString());
+        System.out.println("Player Score: " + playerRoundScore);
+
+
+        System.out.println("Enemy Hand: " + enemyHand.toString());
+        System.out.println("Enemy Score: " + enemyRoundScore);
+
         int earnedPoints;
         if (playerRoundScore > enemyRoundScore) {
             earnedPoints = playerRoundScore - enemyRoundScore;
@@ -79,12 +87,6 @@ public class CardGame {
         } else {
             System.out.println("It's a draw!");
         }
-        System.out.println("Player Hand: " + playerHand.toString());
-        System.out.println("Player Score: " + playerRoundScore);
-
-
-        System.out.println("Enemy Hand: " + enemyHand.toString());
-        System.out.println("Enemy Score: " + enemyRoundScore);
 
 
 
@@ -136,11 +138,27 @@ public class CardGame {
             return false;
         }
     }
+    public void playGame() {
 
+
+        while (!this.isGameOver()) {
+            this.playRound();
+        }
+        System.out.println("--GAME OVER--");
+        if (amIWinning()) {
+            System.out.println("You win!");
+        } else {
+            System.out.println("You lose!");
+        }
+        System.out.println("Final score:");
+        System.out.println("You:" + getPlayerScore());
+        System.out.println("Enemy: " + getOpponentScore());
+
+    }
     public static void main (String args[]) {
         CardGame newGame = new CardGame();
+        newGame.playGame();
 
-        newGame.playRound();
 
 
     }
