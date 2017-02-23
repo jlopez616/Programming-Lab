@@ -27,6 +27,7 @@ public class CardGameTestHarness {
         test_HandDrawNewHand();
         test_HandGetStuff();
         test_HandContains();
+        test_HandCounts();
 
 
 
@@ -1404,7 +1405,7 @@ public class CardGameTestHarness {
         } catch(Exception e) {
             displaySuccessIfTrue(true);
         }
-        System.out.println("Deck drawCardFromTop: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+        System.out.println("Deck drawNewHandFrom: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
     }
 
     public static void test_HandGetStuff(){
@@ -1450,54 +1451,145 @@ public class CardGameTestHarness {
         }
 
         try {
-            Card testCard = testDeck.getCardAt(0);
+            Hand testHand = new Hand();
+            Card testCard = testHand.getCardAt(0);
             Card newCard = new Card(1, Card.Suit.CLUBS);
 
             displaySuccessIfTrue( testDeck.getCardAt(0).equals(newCard) );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
-/*
         try {
-            Card testCard = testDeck.getCardAt(12);
+            Hand testHand = new Hand();
+            Card testCard = testHand.getCardAt(3);
             Card newCard = new Card(4, Card.Suit.CLUBS);
-            if ( newCard.equals(testCard) ) {
-                newCard.setRank(5);
+
+            displaySuccessIfTrue( testDeck.getCardAt(3).equals(newCard) );
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            Hand testHand = new Hand();
+            Card testCard = testHand.getCardAt(-1);
+            displaySuccessIfTrue(false);
+        } catch(ArrayIndexOutOfBoundsException aioobe) {
+            displaySuccessIfTrue(true);
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        System.out.println("Hand getCardAt & getHandSize: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+    }
+
+    public static void test_HandContains(){
+        System.out.println("Testing Hand contains...");
+        int initialSuccesses = successes;
+        int initialAttempts = attempts;
+
+        Deck testDeck = new Deck();
+
+        try {
+            Hand testHand = new Hand();
+            testHand.drawNewHandFrom(testDeck);
+            Card testCard = testHand.getCardAt(0);
+        /*    System.out.println("Test Area Below");
+            boolean hasCard = false;
+            Card tempCard = new Card();
+           System.out.println(" tempcard before loop: " + tempCard.toString());
+            int testRank = testCard.getRank();
+            Card.Suit testSuit = testCard.getSuit();
+            System.out.println(" test card before loop: " + testCard.toString());
+            for (int k = 0; k < testHand.getHandSize(); k++ ) {
+                tempCard.setRank(k + 1);
+                System.out.println("tempcard in loop: " + tempCard.toString());
+                System.out.println("testcard in loop: " + testCard.toString());
+
+                if (testRank == tempCard.getRank()) {
+                    if(testSuit == tempCard.getSuit()) {
+                    hasCard = true;
+                }
             }
-            testDeck.setCardAt(12, newCard);
-            displaySuccessIfTrue( testDeck.getCardAt(12).equals(newCard) );
-        } catch(Exception e) {
-            displaySuccessIfTrue(false);
         }
+System.out.println(hasCard);
 
-        try {
-            Card testCard = testDeck.getCardAt(52);
-            displaySuccessIfTrue(false);
-        } catch(ArrayIndexOutOfBoundsException aioobe) {
-            displaySuccessIfTrue(true);
-        } catch(Exception e) {
-            displaySuccessIfTrue(false);
-        }
 
-        try {
-            Card testCard = testDeck.getCardAt(78);
-            displaySuccessIfTrue(false);
-        } catch(ArrayIndexOutOfBoundsException aioobe) {
-            displaySuccessIfTrue(true);
-        } catch(Exception e) {
-            displaySuccessIfTrue(false);
-        }
-
-        try {
-            Card testCard = testDeck.getCardAt(-12);
-            displaySuccessIfTrue(false);
-        } catch(ArrayIndexOutOfBoundsException aioobe) {
-            displaySuccessIfTrue(true);
-        } catch(Exception e) {
-            displaySuccessIfTrue(false);
-        }
 */
-        System.out.println("Deck getCardAt & setCardAt: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+        //System.out.println(testHand.contains(testCard));
+        displaySuccessIfTrue(testHand.contains(testCard));
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            Hand testHand = new Hand();
+            testHand.drawNewHandFrom(testDeck);
+            Card testCard = new Card(1, Card.Suit.HEARTS);
+            displaySuccessIfTrue(!testHand.contains(testCard));
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        System.out.println("Hand contains:  " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+
+    }
+
+    public static void test_HandCounts(){
+        System.out.println("Testing Hand countInHand...");
+        int initialSuccesses = successes;
+        int initialAttempts = attempts;
+
+
+        try {
+            Deck testDeck = new Deck();
+            Hand testHand = new Hand();
+            testHand.drawNewHandFrom(testDeck);
+            displaySuccessIfTrue(testHand.countInHand(1) == 1);
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            Deck testDeck = new Deck();
+            Hand testHand = new Hand();
+            testHand.drawNewHandFrom(testDeck);
+            displaySuccessIfTrue(testHand.countInHand(Card.Suit.CLUBS) == 5);
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            Deck testDeck = new Deck();
+            Hand testHand = new Hand();
+            testHand.drawNewHandFrom(testDeck);
+            displaySuccessIfTrue(testHand.countInHand(6) == 0);
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            Deck testDeck = new Deck();
+            Hand testHand = new Hand();
+            testHand.drawNewHandFrom(testDeck);
+            displaySuccessIfTrue(testHand.countInHand(Card.Suit.HEARTS) == 0);
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            Deck testDeck = new Deck();
+            Hand testHand = new Hand();
+            testHand.drawNewHandFrom(testDeck);
+            displaySuccessIfTrue(testHand.countOfFaceCards() == 0);
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            Deck testDeck = new Deck();
+            Hand testHand = new Hand(13);
+            testHand.drawNewHandFrom(testDeck);
+            displaySuccessIfTrue(testHand.countOfFaceCards() == 3);
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        System.out.println("Hand counts:  " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
     }
  /*
     public static void test_DeckShuffle(){
