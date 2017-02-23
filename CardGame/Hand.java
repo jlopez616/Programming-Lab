@@ -45,7 +45,11 @@ public class Hand {
      * @return          the number of card this hand can hold
      */
     public int getHandSize() {
-        return cardsInHand.length;
+        int handLength = cardsInHand.length;
+        if (handLength <= 0) {
+            throw new IllegalArgumentException();
+        }
+        return handLength;
         //TODO: Complete this method!
     }
 
@@ -74,9 +78,7 @@ public class Hand {
             basicString = basicString + getCardAt(k).toString() + "\n";
 
         }
-        System.out.println(basicString);
         return basicString;
-        //TODO: Complete this method!
     }
 
     /**
@@ -88,6 +90,7 @@ public class Hand {
      *                 card; <code>false</code> otherwise.
      */
     public boolean contains( Card card ) {
+
         Card tempCard = new Card();
         boolean hasCard = false;
         for (int k = 0; k < this.cardsInHand.length; k++ ) {
@@ -98,7 +101,25 @@ public class Hand {
         }
         return hasCard;
     }
+        /*boolean hasCard = false;
+        Card tempCard = new Card();
+        int testRank = card.getRank();
+        Card.Suit testSuit = card.getSuit();
 
+        for (int k = 0; k < getHandSize(); k++ ) {
+            tempCard.setRank(k + 1);
+            if (testRank == tempCard.getRank()) {
+                if (testSuit == tempCard.getSuit()) {
+                    hasCard = true;
+                }
+            }
+
+        }
+        return hasCard;
+    }
+
+
+*/
     /**
      * Returns the number of cards in this hand with the provided rank.
      *
@@ -108,7 +129,8 @@ public class Hand {
      */
     public int countInHand( int rank ) {
         int rankCount = 0;
-        for (int k = 0; k < this.cardsInHand.length; k++ ) {
+        int cardRank = 0;
+        for (int k = 0; k < getHandSize(); k++ ) {
             if (getCardAt(k).getRank() == rank) {
                 rankCount++;
             }
@@ -124,8 +146,8 @@ public class Hand {
      */
     public int countInHand( Card.Suit suit ) {
         int suitCount = 0;
-        for (int k = 0; k < this.cardsInHand.length; k++ ) {
-            if (getCardAt(k).getSuit() == suit) {
+        for (int k = 0; k < getHandSize(); k++ ) {
+            if (getCardAt(k).getSuit().equals(suit)) {
                 suitCount++;
             }
         }
