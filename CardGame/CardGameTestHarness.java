@@ -20,8 +20,6 @@ public class CardGameTestHarness {
         test_DeckShuffle();
         test_DeckIsStandard();
 
-        //TODO Tests for Hand
-
         test_HandConstants();
         test_HandConstructors();
         test_HandDrawNewHand();
@@ -29,11 +27,9 @@ public class CardGameTestHarness {
         test_HandContains();
         test_HandCounts();
 
-
-
-        //TODO Tests for CardGame
-
-
+        test_CardGameConstants();
+        test_CardGameConstructors();
+        test_CardGameScoreHand();
 
         System.out.println("-----OVERALL PERFORMANCE-----");
         System.out.println(successes + "/" + attempts + " tests passed.");
@@ -1303,14 +1299,14 @@ public class CardGameTestHarness {
 
         try {
             Hand testHand = new Hand();
-            displaySuccessIfTrue(testHand.getHandSize() == 5);
+            displaySuccessIfTrue( testHand.getHandSize() == 5 );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
 
         try {
             Hand testHand = new Hand(1);
-            displaySuccessIfTrue(testHand.getHandSize() == 1);
+            displaySuccessIfTrue( testHand.getHandSize() == 1 );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1318,7 +1314,7 @@ public class CardGameTestHarness {
         try {
             Hand testHand = new Hand(5);
             Hand otherHand = new Hand();
-            displaySuccessIfTrue( testHand.getHandSize() == otherHand.getHandSize());
+            displaySuccessIfTrue( testHand.getHandSize() == otherHand.getHandSize() );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1353,7 +1349,7 @@ public class CardGameTestHarness {
             Hand testHand = new Hand();
             Deck testDeck = new Deck();
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.getCardAt(0).getRank() == 1 && testHand.getCardAt(0).getSuit() == Card.Suit.CLUBS );
+            displaySuccessIfTrue(( testHand.getCardAt(0).getRank() == 1 ) && ( testHand.getCardAt(0).getSuit() == Card.Suit.CLUBS ));
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1362,7 +1358,7 @@ public class CardGameTestHarness {
             Hand testHand = new Hand();
             Deck testDeck = new Deck();
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.getCardAt(1).getRank() == 2 && testHand.getCardAt(1).getSuit() == Card.Suit.CLUBS );
+            displaySuccessIfTrue(( testHand.getCardAt(1).getRank() == 2 ) && ( testHand.getCardAt(1).getSuit() == Card.Suit.CLUBS ));
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1372,7 +1368,7 @@ public class CardGameTestHarness {
             Deck testDeck = new Deck();
             testHand.drawNewHandFrom(testDeck);
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.getCardAt(0).getRank() == 6 && testHand.getCardAt(1).getSuit() == Card.Suit.CLUBS );
+            displaySuccessIfTrue(( testHand.getCardAt(0).getRank() == 6 ) && ( testHand.getCardAt(1).getSuit() == Card.Suit.CLUBS ));
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1382,7 +1378,7 @@ public class CardGameTestHarness {
             Deck testDeck = new Deck();
             Card tempCard = new Card(1, Card.Suit.CLUBS);
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.contains(tempCard));
+            displaySuccessIfTrue( testHand.contains(tempCard) );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1391,7 +1387,7 @@ public class CardGameTestHarness {
             Deck testDeck = new Deck();
             Card tempCard = new Card(5, Card.Suit.CLUBS);
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.contains(tempCard));
+            displaySuccessIfTrue( testHand.contains(tempCard) );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1401,7 +1397,7 @@ public class CardGameTestHarness {
             Deck testDeck = new Deck();
             Card tempCard = new Card(6, Card.Suit.CLUBS);
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(!testHand.contains(tempCard));
+            displaySuccessIfTrue( !testHand.contains(tempCard) );
         } catch(Exception e) {
             displaySuccessIfTrue(true);
         }
@@ -1417,19 +1413,19 @@ public class CardGameTestHarness {
 
         try {
             Hand testHand = new Hand();
-            displaySuccessIfTrue(5 == testHand.getHandSize());
+            displaySuccessIfTrue( 5 == testHand.getHandSize() );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
         try {
             Hand testHand = new Hand(5);
-            displaySuccessIfTrue(5 == testHand.getHandSize());
+            displaySuccessIfTrue( 5 == testHand.getHandSize() );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
         try {
             Hand testHand = new Hand(-3);
-            displaySuccessIfTrue(-3 == testHand.getHandSize());
+            displaySuccessIfTrue( -3 == testHand.getHandSize() );
         } catch(IllegalArgumentException iae) {
             displaySuccessIfTrue(true);
         } catch(Exception e) {
@@ -1437,7 +1433,7 @@ public class CardGameTestHarness {
         }
         try {
             Hand testHand = new Hand(0);
-            displaySuccessIfTrue(0 == testHand.getHandSize());
+            displaySuccessIfTrue( 0 == testHand.getHandSize() );
         } catch(IllegalArgumentException iae) {
             displaySuccessIfTrue(true);
         } catch(Exception e) {
@@ -1445,7 +1441,7 @@ public class CardGameTestHarness {
         }
         try {
             Hand testHand = new Hand(525);
-            displaySuccessIfTrue(525 == testHand.getHandSize());
+            displaySuccessIfTrue( 525 == testHand.getHandSize() );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1493,30 +1489,7 @@ public class CardGameTestHarness {
             Hand testHand = new Hand();
             testHand.drawNewHandFrom(testDeck);
             Card testCard = testHand.getCardAt(0);
-        /*    System.out.println("Test Area Below");
-            boolean hasCard = false;
-            Card tempCard = new Card();
-           System.out.println(" tempcard before loop: " + tempCard.toString());
-            int testRank = testCard.getRank();
-            Card.Suit testSuit = testCard.getSuit();
-            System.out.println(" test card before loop: " + testCard.toString());
-            for (int k = 0; k < testHand.getHandSize(); k++ ) {
-                tempCard.setRank(k + 1);
-                System.out.println("tempcard in loop: " + tempCard.toString());
-                System.out.println("testcard in loop: " + testCard.toString());
-
-                if (testRank == tempCard.getRank()) {
-                    if(testSuit == tempCard.getSuit()) {
-                    hasCard = true;
-                }
-            }
-        }
-System.out.println(hasCard);
-
-
-*/
-        //System.out.println(testHand.contains(testCard));
-        displaySuccessIfTrue(testHand.contains(testCard));
+            displaySuccessIfTrue( testHand.contains(testCard) );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1525,7 +1498,7 @@ System.out.println(hasCard);
             Hand testHand = new Hand();
             testHand.drawNewHandFrom(testDeck);
             Card testCard = new Card(1, Card.Suit.HEARTS);
-            displaySuccessIfTrue(!testHand.contains(testCard));
+            displaySuccessIfTrue( !testHand.contains(testCard) );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
@@ -1544,155 +1517,230 @@ System.out.println(hasCard);
             Deck testDeck = new Deck();
             Hand testHand = new Hand();
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.countInHand(1) == 1);
+            displaySuccessIfTrue( testHand.countInHand(1) == 1 );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
+
         try {
             Deck testDeck = new Deck();
             Hand testHand = new Hand();
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.countInHand(Card.Suit.CLUBS) == 5);
+            displaySuccessIfTrue( testHand.countInHand(1) == 1 );
+        } catch(ArrayIndexOutOfBoundsException aioobe) {
+            displaySuccessIfTrue(true);
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
+
         try {
             Deck testDeck = new Deck();
             Hand testHand = new Hand();
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.countInHand(6) == 0);
+            displaySuccessIfTrue( testHand.countInHand(Card.Suit.CLUBS) == 5 );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
+
         try {
             Deck testDeck = new Deck();
             Hand testHand = new Hand();
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.countInHand(Card.Suit.HEARTS) == 0);
+            displaySuccessIfTrue( testHand.countInHand(6) == 0 );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
+
         try {
             Deck testDeck = new Deck();
             Hand testHand = new Hand();
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.countOfFaceCards() == 0);
+            displaySuccessIfTrue( testHand.countInHand(Card.Suit.HEARTS) == 0 );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
+
+        try {
+            Deck testDeck = new Deck();
+            Hand testHand = new Hand();
+            testHand.drawNewHandFrom(testDeck);
+            displaySuccessIfTrue( testHand.countOfFaceCards() == 0 );
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
         try {
             Deck testDeck = new Deck();
             Hand testHand = new Hand(13);
             testHand.drawNewHandFrom(testDeck);
-            displaySuccessIfTrue(testHand.countOfFaceCards() == 3);
+            displaySuccessIfTrue( testHand.countOfFaceCards() == 3 );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
 
         System.out.println("Hand counts:  " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
     }
- /*
-    public static void test_DeckShuffle(){
-        System.out.println("Testing Deck shuffle...");
-        System.out.println("WARNING: May rarely give false results due to random nature");
+
+    public static void test_CardGameConstants() {
+        System.out.println("Testing Card Game constants");
         int initialSuccesses = successes;
         int initialAttempts = attempts;
 
-        Deck firstDeckStandard = new Deck();
-        Deck secondDeckStandard = new Deck();
-        Deck controlDeckStandard = new Deck();
-
         try {
-            displaySuccessIfTrue( firstDeckStandard.orderedEquals(secondDeckStandard)
-                    && firstDeckStandard.equals(secondDeckStandard)
-                    && firstDeckStandard.equals(controlDeckStandard)
-                    && secondDeckStandard.equals(controlDeckStandard));
+            displaySuccessIfTrue(CardGame.END_SCORE== 50);
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
 
-        for (int i = 0; i < 10; i++) {
-            try {
-                firstDeckStandard.shuffle();
-                secondDeckStandard.shuffle();
-                displaySuccessIfTrue( !firstDeckStandard.orderedEquals(secondDeckStandard)
-                        && firstDeckStandard.equals(secondDeckStandard)
-                        && firstDeckStandard.equals(controlDeckStandard)
-                        && secondDeckStandard.equals(controlDeckStandard));
-            } catch(Exception e) {
-                displaySuccessIfTrue(false);
-            }
-        }
-
-
-        Deck firstDeckTriple = new Deck(3);
-        Deck secondDeckTriple = new Deck(3);
-        Deck controlDeckTriple = new Deck(3);
-
-        try {
-            displaySuccessIfTrue( firstDeckTriple.orderedEquals(secondDeckTriple)
-                    && firstDeckTriple.equals(secondDeckTriple)
-                    && firstDeckTriple.equals(controlDeckTriple)
-                    && secondDeckTriple.equals(controlDeckTriple));
-        } catch(Exception e) {
-            displaySuccessIfTrue(false);
-        }
-
-        for (int i = 0; i < 10; i++) {
-            try {
-                firstDeckTriple.shuffle();
-                secondDeckTriple.shuffle();
-                displaySuccessIfTrue( !firstDeckTriple.orderedEquals(secondDeckTriple)
-                        && firstDeckTriple.equals(secondDeckTriple)
-                        && firstDeckTriple.equals(controlDeckTriple)
-                        && secondDeckTriple.equals(controlDeckTriple));
-            } catch(Exception e) {
-                displaySuccessIfTrue(false);
-            }
-        }
-
-        System.out.println("Deck shuffle: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+       System.out.println("Card Game constants: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
     }
 
-    public static void test_DeckIsStandard(){
-        System.out.println("Testing Deck isStandardDeck...");
+    public static void test_CardGameScoreHand(){
+        System.out.println("Testing CardGame scoreHand...");
         int initialSuccesses = successes;
         int initialAttempts = attempts;
 
-        Deck testDeck = new Deck();
-
         try {
-            displaySuccessIfTrue( testDeck.isStandardDeck() );
+            CardGame testGame = new CardGame();
+
+            testGame.mainDeck.setCardAt(0, new Card(11, Card.Suit.DIAMONDS) );
+            testGame.mainDeck.setCardAt(1, new Card(8, Card.Suit.CLUBS) );
+            testGame.mainDeck.setCardAt(2, new Card(13, Card.Suit.HEARTS) );
+            testGame.mainDeck.setCardAt(3, new Card(4, Card.Suit.HEARTS) );
+            testGame.mainDeck.setCardAt(4, new Card(6, Card.Suit.DIAMONDS) );
+
+            testGame.mainDeck.setCardAt(5, new Card(11, Card.Suit.CLUBS) );
+            testGame.mainDeck.setCardAt(6, new Card(7, Card.Suit.DIAMONDS) );
+            testGame.mainDeck.setCardAt(7, new Card(5, Card.Suit.DIAMONDS) );
+            testGame.mainDeck.setCardAt(8, new Card(7, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(9, new Card(8, Card.Suit.DIAMONDS) );
+            testGame.playerHand.drawNewHandFrom(testGame.mainDeck);
+            testGame.enemyHand.drawNewHandFrom(testGame.mainDeck);
+
+            displaySuccessIfTrue( (testGame.scoreHand(testGame.playerHand, testGame.enemyHand) == 7)
+                                && (testGame.scoreHand(testGame.enemyHand, testGame.playerHand) == 31) );
+
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
 
         try {
-            testDeck.shuffle();
-            displaySuccessIfTrue( testDeck.isStandardDeck() );
+            CardGame testGame = new CardGame();
+
+            testGame.mainDeck.setCardAt(0, new Card(6, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(1, new Card(4, Card.Suit.DIAMONDS) );
+            testGame.mainDeck.setCardAt(2, new Card(6, Card.Suit.HEARTS) );
+            testGame.mainDeck.setCardAt(3, new Card(12, Card.Suit.HEARTS) );
+            testGame.mainDeck.setCardAt(4, new Card(7, Card.Suit.CLUBS) );
+
+            testGame.mainDeck.setCardAt(5, new Card(1, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(6, new Card(13, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(7, new Card(9, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(8, new Card(12, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(9, new Card(13, Card.Suit.DIAMONDS) );
+            testGame.playerHand.drawNewHandFrom(testGame.mainDeck);
+            testGame.enemyHand.drawNewHandFrom(testGame.mainDeck);
+
+            displaySuccessIfTrue( (testGame.scoreHand(testGame.playerHand, testGame.enemyHand) == 31)
+                                && (testGame.scoreHand(testGame.enemyHand, testGame.playerHand) == 35) );
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
 
         try {
-            Card newCard = new Card(10, Card.Suit.DIAMONDS);
-            if ( newCard.equals(testDeck.getCardAt(5)) ) {
-                newCard.setRank(9);
-            }
-            testDeck.setCardAt(5, newCard);
-            displaySuccessIfTrue( !testDeck.isStandardDeck() );
+            CardGame testGame = new CardGame();
+
+            testGame.mainDeck.setCardAt(0, new Card(1, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(1, new Card(4, Card.Suit.DIAMONDS) );
+            testGame.mainDeck.setCardAt(2, new Card(6, Card.Suit.HEARTS) );
+            testGame.mainDeck.setCardAt(3, new Card(12, Card.Suit.HEARTS) );
+            testGame.mainDeck.setCardAt(4, new Card(7, Card.Suit.CLUBS) );
+
+            testGame.mainDeck.setCardAt(5, new Card(1, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(6, new Card(13, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(7, new Card(9, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(8, new Card(2, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(9, new Card(1, Card.Suit.DIAMONDS) );
+            testGame.playerHand.drawNewHandFrom(testGame.mainDeck);
+            testGame.enemyHand.drawNewHandFrom(testGame.mainDeck);
+
+            displaySuccessIfTrue( (testGame.scoreHand(testGame.playerHand, testGame.enemyHand) != 31)
+                                && (testGame.scoreHand(testGame.enemyHand, testGame.playerHand) != 35) );
         } catch(Exception e) {
-            displaySuccessIfTrue(false);
+            displaySuccessIfTrue(true);
         }
 
         try {
-            Deck doubleDeck = new Deck(2);
-            displaySuccessIfTrue( !doubleDeck.isStandardDeck() );
+            CardGame testGame = new CardGame();
+
+            testGame.mainDeck.setCardAt(0, new Card(10, Card.Suit.CLUBS) );
+            testGame.mainDeck.setCardAt(1, new Card(3, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(2, new Card(1, Card.Suit.CLUBS) );
+            testGame.mainDeck.setCardAt(3, new Card(3, Card.Suit.DIAMONDS) );
+            testGame.mainDeck.setCardAt(4, new Card(3, Card.Suit.HEARTS) );
+
+            testGame.mainDeck.setCardAt(5, new Card(2, Card.Suit.SPADES) );
+            testGame.mainDeck.setCardAt(6, new Card(1, Card.Suit.DIAMONDS) );
+            testGame.mainDeck.setCardAt(7, new Card(11, Card.Suit.HEARTS) );
+            testGame.mainDeck.setCardAt(8, new Card(6, Card.Suit.CLUBS) );
+            testGame.mainDeck.setCardAt(9, new Card(10, Card.Suit.SPADES) );
+            testGame.playerHand.drawNewHandFrom(testGame.mainDeck);
+            testGame.enemyHand.drawNewHandFrom(testGame.mainDeck);
+
+            displaySuccessIfTrue( (testGame.scoreHand(testGame.playerHand, testGame.enemyHand) == 36)
+                                && (testGame.scoreHand(testGame.enemyHand, testGame.playerHand) == 23) );
+
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
 
-        System.out.println("Deck isStandardDeck: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+        System.out.println("Card Game Scores: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+
     }
-    */
+
+    public static void test_CardGameConstructors(){
+        System.out.println("Testing CardGame constructors...");
+        int initialSuccesses = successes;
+        int initialAttempts = attempts;
+
+        try {
+            CardGame testGame = new CardGame();
+            displaySuccessIfTrue( testGame.mainDeck.remainingCards() == 52 );
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            CardGame testGame = new CardGame();
+            displaySuccessIfTrue( (testGame.playerHand.getHandSize() == 5) && (testGame.enemyHand.getHandSize() == 5) );
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            CardGame testGame = new CardGame(2, 2);
+            displaySuccessIfTrue( testGame.mainDeck.remainingCards() == 104 );
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            CardGame testGame = new CardGame(2, 2);
+            displaySuccessIfTrue( ( (testGame.playerHand.getHandSize() == 2) && (testGame.enemyHand.getHandSize() == 2) ) );
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            CardGame testGame = new CardGame(-1, -2);
+            displaySuccessIfTrue(false);
+        } catch(IllegalArgumentException iae) {
+            displaySuccessIfTrue(true);
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        System.out.println("Card Game Constructors: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+    }
+
 }
