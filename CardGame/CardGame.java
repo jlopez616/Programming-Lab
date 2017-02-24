@@ -1,4 +1,5 @@
 public class CardGame {
+
     public static final int END_SCORE = 50;
     public Hand playerHand;
     public Hand enemyHand;
@@ -22,81 +23,45 @@ public class CardGame {
     }
 
     public void playRound() {
-    /*    this.playerHand.drawNewHandFrom(mainDeck);
-        this.enemyHand.drawNewHandFrom(mainDeck);
-        this.playerHand.toString();
-        this.enemyHand.toString(); */
         this.playerHand.drawNewHandFrom(mainDeck);
         this.enemyHand.drawNewHandFrom(mainDeck);
+
         int playerRoundScore = 0;
         int enemyRoundScore = 0 ;
 
-
-
-
-
-    /*    if (playerHand.countOfFaceCards() > 0) {
-            if (countInHand(currentSuit) > 2) {
-                this.playerScore = this.playerScore + 10 * playerHand.countOfFaceCards();
-            }
-        }
-        if (enemyHand.countOfFaceCards() > 0) {
-            if (countInHand(currentSuit) > 2) {
-                this.enemyScore = this.enemyScore + 10 * enemyHand.countOfFaceCards();
-            }
-        } */
-
-        //change this and all the other "or"s
-    /*    if ((playerHand.countInHand(5) > 0) || (playerHand.countInHand(4) > 0) || (playerHand.countInHand(3) > 0)
-            || (playerHand.countInHand(2) > 0)) {
-                if(enemyHand.countOfFaceCards() > 0) {
-                    playerRoundScore = playerRoundScore + 7;
-                }
-            }
-
-        if ((enemyHand.countInHand(5) > 0) || (enemyHand.countInHand(4) > 0) || (enemyHand.countInHand(3) > 0)
-            || (enemyHand.countInHand(2) > 0)) {
-                if(playerHand.countOfFaceCards() > 0) {
-                    enemyRoundScore = enemyRoundScore + 7;
-                }
-            }
-
-        if (playerHand.countInHand(1) > 0) {
-            playerRoundScore = playerRoundScore + 15;
-        }
-
-        if (enemyHand.countInHand(1) > 0) {
-            enemyRoundScore = enemyRoundScore + 15;
-        } */
-
         this.currentRound++;
+
         System.out.println("--ROUND " + currentRound + "--");
-        System.out.println("Your Hand: ");
+        System.out.println("Your Hand: " + "\n" + "{");
         System.out.println(playerHand.toString());
-        System.out.println("Score: " + playerRoundScore + "\n");
+        playerRoundScore = scoreHand( this.playerHand, this.enemyHand );
+        System.out.println( "}" + "\n" + "Score: " + playerRoundScore + "\n" );
 
-
-
-        System.out.println("Enemy Hand: ");
+        System.out.println("Enemy Hand: " + "\n" + "{");
         System.out.println(enemyHand.toString());
-        System.out.println("Score: " + enemyRoundScore + "\n");
+        enemyRoundScore = scoreHand(this.enemyHand, this.playerHand);
+        System.out.println("}" + "\n" + "Score: " + enemyRoundScore + "\n" );
 
         int earnedPoints;
-        if (playerRoundScore > enemyRoundScore) {
+        if ( playerRoundScore > enemyRoundScore ) {
             earnedPoints = playerRoundScore - enemyRoundScore;
             this.playerScore = this.playerScore + earnedPoints;
-            System.out.println("You score  "  + earnedPoints + " points!");
-        } else if (enemyRoundScore > playerRoundScore) {
+            if ( earnedPoints == 1 ) {
+                System.out.println("You scored a point!");
+            } else {
+                System.out.println("You score  "  + earnedPoints + " points!");
+            }
+        } else if ( enemyRoundScore > playerRoundScore ) {
             earnedPoints = enemyRoundScore - playerRoundScore;
             this.enemyScore = this.enemyScore + earnedPoints;
-            System.out.println("Your enemy scores " + earnedPoints + " points!");
-        } else {``
+            if ( earnedPoints == 1 ) {
+                System.out.println("Your enemy scored a point!");
+            } else {
+                System.out.println("Your enemy scores " + earnedPoints + " points!");
+            }
+        } else {
             System.out.println("It's a draw!");
         }
-
-
-
-
 
         System.out.println("You: " + this.playerScore);
         System.out.println("Enemy: " + this.enemyScore +  "\n");
@@ -104,34 +69,31 @@ public class CardGame {
     }
 
     public static int scoreHand ( Hand scoredHand, Hand otherHand ) {
-
         int roundScore = 0;
 
-
-        for (int k = 0; k < scoredHand.getHandSize(); k++) {
-            Card compCard = getCardAt(k);
-            if (getCardAt(k).getRank() == 1) {
-                aplayerRoundScore = aplayerRoundScore ++;
-
+        for ( int k = 0; k < scoredHand.getHandSize(); k++ ) {
+            Card compCard = scoredHand.getCardAt(k);
+            if ( compCard.getRank() == 1 ) {
+                roundScore = roundScore + 15;
             }
-
+            if ( (compCard.getRank() >= 2) && (compCard.getRank() <= 5) ) {
+                if ( otherHand.countOfFaceCards() > 0 ) {
+                    roundScore = roundScore + 7;
+                }
+            }
+            if ( (compCard.getRank() >= 6) && (compCard.getRank() <= 10) ) {
+                if( ( scoredHand.countInHand(compCard.getRank() + 1) > 0  ) || (scoredHand.countInHand(compCard.getRank() - 1) > 0) ) {
+                    roundScore = roundScore + 8;
+                }
+            }
+            if (compCard.getRank() > 10) {
+                if( (scoredHand.countInHand(compCard.getSuit()) >= 2) ) {
+                    roundScore = roundScore + 10;
+                }
+            }
         }
         return roundScore;
     }
-    /*    int earnedPoints;
-        if (playerRoundScore > enemyRoundScore) {
-            earnedPoints = playerRoundScore - enemyRoundScore;
-            this.playerScore = this.playerScore + earnedPoints;
-            System.out.println("You score  "  + earnedPoints + " points!");
-        } else if (enemyRoundScore > playerRoundScore) {
-            earnedPoints = enemyRoundScore - playerRoundScore;
-            this.enemyScore = this.enemyScore + earnedPoints;
-            System.out.println("Your opponent scores " + earnedPoints + " points!");
-        } else {
-            System.out.println("It's a draw!");
-        }
-        return 0; */
-
 
     public int getPlayerScore() {
         return this.playerScore;
@@ -141,7 +103,7 @@ public class CardGame {
     }
 
     public boolean amIWinning() {
-        if (getPlayerScore() > getOpponentScore()) {
+        if ( getPlayerScore() > getOpponentScore() ) {
             return true;
         } else {
             return false;
@@ -151,9 +113,9 @@ public class CardGame {
     public boolean isGameOver() {
         if (getPlayerScore() >= 50) {
             return true;
-        } else if (getOpponentScore() >= 50) {
+        } else if ( getOpponentScore() >= 50 ) {
             return true;
-        } else if (mainDeck.remainingCards() < (playerHand.getHandSize() * 2)){
+        } else if ( mainDeck.remainingCards() < (playerHand.getHandSize() * 2) ){
             return true;
         } else {
             return false;
@@ -162,24 +124,36 @@ public class CardGame {
     public void playGame() {
 
 
-        while (!this.isGameOver()) {
+        while ( !this.isGameOver() ) {
             this.playRound();
         }
+
         System.out.println("--GAME OVER--");
-        if (amIWinning()) {
+        if ( getOpponentScore() < getPlayerScore() ) {
             System.out.println("You win!");
+        } else if ( getOpponentScore() == getPlayerScore() ) {
+            System.out.println("It's a tie!");
         } else {
             System.out.println("You lose!");
         }
+
         System.out.println("Final score:");
         System.out.println("You:" + getPlayerScore());
         System.out.println("Enemy: " + getOpponentScore());
 
     }
     public static void main (String args[]) {
-        CardGame newGame = new CardGame();
-        newGame.playGame();
+
+        if ( args.length == 2 ) {
+            int sizeHand = Integer.parseInt(args[0]);
+            int deckCopies = Integer.parseInt(args[1]);
+            CardGame newGame = new CardGame(sizeHand, deckCopies);
+            newGame.playGame();
+        } else if ( args.length == 0 ) {
+            CardGame newGame = new CardGame();
+            newGame.playGame();
+        } else {
+            System.out.println("Usage instructions: java CardGame [<hand size> <copies of each card in deck>]");
+        }
     }
-
-
 }
