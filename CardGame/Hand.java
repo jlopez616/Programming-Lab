@@ -2,6 +2,7 @@
  * Hand represents a hand of playing cards using French suits containing a set
  * number of cards.
  */
+ 
 public class Hand {
     private Card[] cardsInHand;
     public static final int STANDARD_HAND_SIZE = 5;
@@ -9,6 +10,7 @@ public class Hand {
     /**
      * Constructs an empty hand of the standard hand size.
      */
+     
     public Hand() {
         this.cardsInHand = new Card[STANDARD_HAND_SIZE];
     }
@@ -18,6 +20,7 @@ public class Hand {
      * @param handSize     the number of cards the hand can hold
      * @throws IllegalArgumentException    if an non-positive hand size is provided
      */
+     
     public Hand( int handSize ) {
         if (handSize <= 0) {
             throw new IllegalArgumentException();
@@ -32,11 +35,11 @@ public class Hand {
      *
      * @param deck     the number of cards the hand can hold
      */
+     
     public void drawNewHandFrom( Deck deck ) {
-        for (int cardsAmount = 0; cardsAmount < getHandSize(); cardsAmount++) {
+        for ( int cardsAmount = 0; cardsAmount < getHandSize(); cardsAmount++ ) {
             cardsInHand[cardsAmount] = deck.drawCardFromTop();
         }
-        //TODO: Complete this method!
     }
 
     /**
@@ -44,13 +47,13 @@ public class Hand {
      *
      * @return          the number of card this hand can hold
      */
+     
     public int getHandSize() {
         int handLength = cardsInHand.length;
         if (handLength <= 0) {
             throw new IllegalArgumentException();
         }
         return handLength;
-        //TODO: Complete this method!
     }
 
     /**
@@ -59,10 +62,9 @@ public class Hand {
      * @param index     the index of the card in the hand
      * @return          the card at the provided index in the hand
      */
+     
     public Card getCardAt( int index ) {
         return cardsInHand[index];
-
-        //TODO: Complete this method!
     }
 
     /**
@@ -71,11 +73,12 @@ public class Hand {
      *
      * @return         a string representation of the hand
      */
+     
     @Override
     public String toString() {
        String basicString = "";
         for (int k = 0; k < this.cardsInHand.length; k++ ) {
-            basicString = basicString + getCardAt(k).toString() + "\n";
+            basicString = basicString + "\t"+ getCardAt(k).toString() + "\n";
 
         }
         return basicString;
@@ -89,37 +92,20 @@ public class Hand {
      * @return         <code>true</code> if this hand conta  ins an equivalent
      *                 card; <code>false</code> otherwise.
      */
+     
     public boolean contains( Card card ) {
 
         Card tempCard = new Card();
         boolean hasCard = false;
-        for (int k = 0; k < this.cardsInHand.length; k++ ) {
+        for ( int k = 0; k < this.cardsInHand.length; k++ ) {
             tempCard =  getCardAt(k);
-            if (tempCard.equals(card)) {
+            if ( tempCard.equals(card) ) {
                 hasCard = true;
             }
         }
         return hasCard;
     }
-        /*boolean hasCard = false;
-        Card tempCard = new Card();
-        int testRank = card.getRank();
-        Card.Suit testSuit = card.getSuit();
 
-        for (int k = 0; k < getHandSize(); k++ ) {
-            tempCard.setRank(k + 1);
-            if (testRank == tempCard.getRank()) {
-                if (testSuit == tempCard.getSuit()) {
-                    hasCard = true;
-                }
-            }
-
-        }
-        return hasCard;
-    }
-
-
-*/
     /**
      * Returns the number of cards in this hand with the provided rank.
      *
@@ -127,11 +113,12 @@ public class Hand {
      * @return         the number of cards in the hand with the provided rank
      * @throws IllegalArgumentException    if an invalid rank is provided
      */
+     
     public int countInHand( int rank ) {
         int rankCount = 0;
         int cardRank = 0;
-        for (int k = 0; k < getHandSize(); k++ ) {
-            if (getCardAt(k).getRank() == rank) {
+        for ( int k = 0; k < getHandSize(); k++ ) {
+            if  ( getCardAt(k).getRank() == rank ) {
                 rankCount++;
             }
         }
@@ -144,10 +131,11 @@ public class Hand {
      * @param suit     the suit being searched for
      * @return         the number of cards in the hand with the provided suit
      */
+     
     public int countInHand( Card.Suit suit ) {
         int suitCount = 0;
-        for (int k = 0; k < getHandSize(); k++ ) {
-            if (getCardAt(k).getSuit().equals(suit)) {
+        for ( int k = 0; k < getHandSize(); k++ ) {
+            if ( getCardAt(k).getSuit().equals(suit) ) {
                 suitCount++;
             }
         }
@@ -160,14 +148,15 @@ public class Hand {
      *
      * @return         the number of cards in the hand with face ranks
      */
+     
     public int countOfFaceCards() {
         int faceCount = 0;
-        for (int k = 0; k < this.cardsInHand.length; k++) {
-            if (getCardAt(k).getRank() == 11) {
+        for ( int k = 0; k < this.cardsInHand.length; k++ ) {
+            if ( getCardAt(k).getRank() == 11 ) {
                 faceCount++;
-            } else if (getCardAt(k).getRank() == 12) {
+            } else if ( getCardAt(k).getRank() == 12 ) {
                 faceCount++;
-            } else if (getCardAt(k).getRank() == 13) {
+            } else if ( getCardAt(k).getRank() == 13 ) {
                 faceCount++;
             }
         }
