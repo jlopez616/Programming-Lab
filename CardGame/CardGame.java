@@ -16,11 +16,16 @@ public class CardGame {
     }
 
     public CardGame( int handSize, int copiesPerDeck ) {
-        this.mainDeck = new Deck(copiesPerDeck);
-        this.playerHand = new Hand(handSize);
-        this.enemyHand = new Hand(handSize);
-        this.mainDeck.shuffle();
+        if ( (handSize > 0) && (copiesPerDeck > 0) ) {
+            this.mainDeck = new Deck(copiesPerDeck);
+            this.playerHand = new Hand(handSize);
+            this.enemyHand = new Hand(handSize);
+            this.mainDeck.shuffle();
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
+
 
     public void playRound() {
         this.playerHand.drawNewHandFrom(mainDeck);
@@ -87,7 +92,7 @@ public class CardGame {
                 }
             }
             if (compCard.getRank() > 10) {
-                if( (scoredHand.countInHand(compCard.getSuit()) >= 2) ) {
+                if( (scoredHand.countInHand(compCard.getSuit()) >= 3) ) {
                     roundScore = roundScore + 10;
                 }
             }
@@ -138,7 +143,7 @@ public class CardGame {
         }
 
         System.out.println("Final score:");
-        System.out.println("You: " + getPlayerScore());
+        System.out.println("You:" + getPlayerScore());
         System.out.println("Enemy: " + getOpponentScore());
 
     }
