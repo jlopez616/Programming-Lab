@@ -19,8 +19,8 @@ public class Deck {
         this.cards = new Card[STANDARD_DECK_SIZE];
         this.topCardIndex = 0;
         int cardIndex = 0;
-        for (Card.Suit currentSuit : Card.Suit.values()){
-            for (int i = Card.ACE; i <= Card.KING; i++) {
+        for ( Card.Suit currentSuit : Card.Suit.values() ) {
+            for ( int i = Card.ACE; i <= Card.KING; i++ ) {
                 this.cards[cardIndex] = new Card(i, currentSuit);
                 cardIndex++;
 
@@ -37,16 +37,15 @@ public class Deck {
      *                                       is provided
      */
     public Deck( int copiesPerCard ) {
-
-        if (copiesPerCard <= 0) {
+        if ( copiesPerCard <= 0 ) {
             throw new IllegalArgumentException();
         }
         this.cards = new Card[STANDARD_DECK_SIZE * copiesPerCard];
         this.topCardIndex = 0;
         int cardIndex = 0;
-        for (int j = 0; j < copiesPerCard; j++) {
-            for (Card.Suit currentSuit : Card.Suit.values()){
-                for (int i = Card.ACE; i <= Card.KING; i++) {
+        for ( int j = 0; j < copiesPerCard; j++ ) {
+            for ( Card.Suit currentSuit : Card.Suit.values() ) {
+                for ( int i = Card.ACE; i <= Card.KING; i++ ) {
                     this.cards[cardIndex] = new Card(i, currentSuit);
                     cardIndex++;
                 }
@@ -72,12 +71,12 @@ public class Deck {
      * @throws ArrayIndexOutOfBoundsException      if there are no more cards left to draw
      */
     public Card drawCardFromTop() {
-
+        Card topCard = new Card( cards[this.topCardIndex].getRank(), cards[this.topCardIndex].getSuit() );
         this.topCardIndex++;
-        if (this.topCardIndex > this.cards.length) {
+        if ( this.topCardIndex > this.cards.length ) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return new Card( cards[this.topCardIndex - 1].getRank(), cards[this.topCardIndex -1].getSuit());
+        return topCard;
     }
 
     /**
@@ -90,11 +89,11 @@ public class Deck {
      *                       otherwise.
      */
     public boolean orderedEquals( Deck otherDeck ) {
-        if (this.cards.length != otherDeck.cards.length){
+        if ( this.cards.length != otherDeck.cards.length ){
             return false;
         }
-        for (int count = 0; count < otherDeck.cards.length; count++) {
-            if (!(this.getCardAt(count).equals(otherDeck.getCardAt(count)))) {
+        for ( int count = 0; count < otherDeck.cards.length; count++ ) {
+            if ( !(this.getCardAt(count).equals(otherDeck.getCardAt(count))) ) {
                 return false;
             }
         }
@@ -129,7 +128,7 @@ public class Deck {
 
     public void shuffle() {
         int cardIndex = 0;
-        for (int shuffles = 0; shuffles < cards.length; shuffles++) {
+        for ( int shuffles = 0; shuffles < cards.length; shuffles++ ) {
             int randomIndex = (int)(Math.random() * cards.length);
             Card placeHolder = getCardAt(cardIndex).copyCard();
             Card switchCard = getCardAt(randomIndex).copyCard();
@@ -148,10 +147,8 @@ public class Deck {
 
      */
     public boolean isStandardDeck() {
-
         Deck standardDeck = new Deck();
         return this.equals(standardDeck);
-
     }
 
     /**
@@ -163,8 +160,8 @@ public class Deck {
     @Override
     public String toString() {
         String basicString = "";
-        for (int k = 0; k < this.cards.length; k++ ) {
-            basicString = basicString + getCardAt(k).toString();
+        for ( int k = 0; k < this.cards.length; k++ ) {
+            basicString = basicString + getCardAt(k).toString() + "\n";
 
         }
         return basicString;
