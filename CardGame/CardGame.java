@@ -138,7 +138,7 @@ public class CardGame {
         }
 
         System.out.println("Final score:");
-        System.out.println("You:" + getPlayerScore());
+        System.out.println("You: " + getPlayerScore());
         System.out.println("Enemy: " + getOpponentScore());
 
     }
