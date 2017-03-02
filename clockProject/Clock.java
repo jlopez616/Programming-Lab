@@ -85,17 +85,30 @@ public class Clock  {
 
     }
 
-    public void tick(long tickBy){
+    public void tick(){
 
-        //we go forward by the timeSlice
-
-        //adding the timeslice to the timepassed
-        //then clean up
-        return;
+        this.secondsPassed += this.forwardBySeconds;
+        //    System.out.println(getSeconds());
+        if (getSeconds() >= 60) {
+            this.minutesPassed += getSeconds() / 60;
+            this.secondsPassed = getSeconds() % 60;
+                if (getMinutes() >= 60) {
+                    this.hoursPassed += getHours() / 60;
+                    this.minutesPassed = getMinutes() % 60;
+                }
+        }
     }
 
     public static void main(String args[]) {
-        Clock clock = new Clock();
-        System.out.println(clock.toString());
+        if (args.length == 0) {
+            Clock clock = new Clock();
+            clock.tick();
+            System.out.println(clock.toString());
+        } else {
+            Clock clock = new Clock( Double.parseDouble(args[0]));
+            clock.tick();
+            System.out.println(clock.toString());
+        }
+
     }
 }
