@@ -1,26 +1,28 @@
 public class ClockSolver {
     public Clock clock;
-    public int currentAngle = 0;
+    public static final double ANGLECHANGE = 5.5 / 60;
+    public double currentAngle = 0;
 
     public ClockSolver() {
         this.clock = new Clock();
     }
 
-    public int clockAngle() {
-        int minuteHand = ((clock.getMinutes() / 60 ) * 360);
-        int hourHand = ( minuteHand / 12 );
-
-        return minuteHand;
-    }
 
     public void getAngles() {
-        while (clock.getHours() <= 12 /*Clock.MAXHOURS ? */ ) {
+        while (clock.getHours() < 12 /*Clock.MAXHOURS ? */) {
             clock.tick();
-            this.currentAngle = clockAngle();
-            if (this.currentAngle == 180) {
+            System.out.println("Minute: " +  clock.getMinutes());
+            System.out.println("Hour: " +  clock.getHours());
+
+            this.currentAngle = (5.5 * clock.getMinutes());
+            if (clock.getSeconds() < 0) {
+                this.currentAngle = this.currentAngle + (clock.getSeconds() * this.ANGLECHANGE);
+            }
+            System.out.println(currentAngle);
+        /*    if (this.currentAngle == 180) {
                 System.out.println(clock.toString());
             }
-
+       */
         }
     }
 
