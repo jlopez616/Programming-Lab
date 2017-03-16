@@ -13,18 +13,21 @@ public class ClockSolver {
 
 
     public void getAngles( double degree ) {
+        double difference;
         while (clock.getHours() <= 12 /*Clock.MAXHOURS ? */) {
             clock.tick();
         //    System.out.println("Minute: " +  clock.getMinutes());
         //    System.out.println("Hour: " +  clock.getHours());
-        /*    this.currentAngle = (5.5 * clock.getMinutes());
-            if (clock.getSeconds() < 0) {
+           difference = ANGLECHANGE * clock.getTimeSlice();
+           this.currentAngle += difference;
+        /*    if (clock.getSeconds() < 0) {
                 this.currentAngle = this.currentAngle + (clock.getSeconds() * this.ANGLECHANGE);
             }
         */
-           this.currentAngle = this.currentAngle + (clock.getSeconds() * this.ANGLECHANGE);
-            System.out.println(currentAngle);
-            if (this.currentAngle == degree) {
+
+          // this.currentAngle = this.currentAngle + (clock.getSeconds() * this.ANGLECHANGE);
+            //System.out.println(currentAngle);
+            if ((degree - (difference / 2) < this.currentAngle) && (this.currentAngle <  degree + (difference / 2))) {
                 System.out.println(clock.toString());
             }
 
