@@ -7,10 +7,14 @@ public class ClockSolver {
         this.clock = new Clock();
     }
 
+    public ClockSolver( double timeSlice ) {
+        this.clock = new Clock(timeSlice);
+    }
 
-    public void getAngles( double degree, double timeSlice) {
+
+    public void getAngles( double degree ) {
         while (clock.getHours() <= 12 /*Clock.MAXHOURS ? */) {
-            clock.tick(timeSlice);
+            clock.tick();
         //    System.out.println("Minute: " +  clock.getMinutes());
         //    System.out.println("Hour: " +  clock.getHours());
         /*    this.currentAngle = (5.5 * clock.getMinutes());
@@ -30,16 +34,27 @@ public class ClockSolver {
     public static void main(String args[]) {
         try {
             double degree = Double.parseDouble(args[0]);
-            double timeSlice = Double.parseDouble(args[1]);
-            ClockSolver clockSolver = new ClockSolver();
-            if (degree > 0) {
-                clockSolver.getAngles(degree, timeSlice);
+            double timeSlice;
+            ClockSolver clockSolver;
+            if (args.length == 1) {
+                clockSolver = new ClockSolver();
             } else {
-                System.out.println("Usage instructions: java Clocksolver <angle in degrees> <(optional)timeslice in seconds>");
+                timeSlice = Double.parseDouble(args[1]);
+                if ((timeSlice > 0) && (timeSlice < 1800)) {
+                    clockSolver = new ClockSolver(timeSlice);
+                } else {
+                    throw new IllegalArgumentException();
+                }
+            }
+
+            if (degree > 0) {
+                clockSolver.getAngles(degree);
+            } else {
+                throw new IllegalArgumentException();
             }
         }
         catch (Exception e) {
-            System.out.println("Usage instructions: java Clocksolver <angle in degrees> <(optional)timeslice in seconds>");
+            System.out.println("Usage instructions: java Clocksolver <angle in degrees> <(optional)timeslice in seconds, must be greater than 0 and less than 1800>");
         }
     }
 }
