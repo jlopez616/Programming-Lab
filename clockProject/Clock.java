@@ -85,6 +85,10 @@ public class Clock  {
 
     }
 
+    public double getTimeSlice(){
+        return forwardBySeconds;
+    }
+
 
     public void tick(){
 
