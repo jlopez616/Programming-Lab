@@ -14,7 +14,7 @@ public class ClockSolver {
 
     public void getAngles( double degree ) {
         double difference;
-        while (clock.getHours() <= 12) {
+        while (clock.getHours() < 12) {
             clock.tick();
 
             difference = ANGLECHANGE * clock.getTimeSlice();
