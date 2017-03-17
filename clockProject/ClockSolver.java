@@ -12,26 +12,18 @@ public class ClockSolver {
         this.clock = new Clock(timeSlice);
     }
 
-
     public void getAngles( double degree ) {
         double difference;
-        while (clock.getHours() <= 12 /*Clock.MAXHOURS ? */) {
+        while (clock.getHours() <= 12) {
             clock.tick();
-        //    System.out.println("Minute: " +  clock.getMinutes());
-        //    System.out.println("Hour: " +  clock.getHours());
-           difference = ANGLECHANGE * clock.getTimeSlice();
-           this.currentAngle += difference;
-           if (this.currentAngle > 360) {
-               this.currentAngle = this.currentAngle - 360;
-           }
-           this.adjacentAngle = 360 - this.currentAngle;
-        /*    if (clock.getSeconds() < 0) {
-                this.currentAngle = this.currentAngle + (clock.getSeconds() * this.ANGLECHANGE);
-            }
-        */
 
-          // this.currentAngle = this.currentAngle + (clock.getSeconds() * this.ANGLECHANGE);
-            //System.out.println(currentAngle);
+            difference = ANGLECHANGE * clock.getTimeSlice();
+            this.currentAngle += difference;
+
+            if (this.currentAngle > 360) {
+                this.currentAngle = this.currentAngle - 360;
+            }
+            this.adjacentAngle = 360 - this.currentAngle;
 
             if ((degree - (difference / 2) < this.currentAngle) && (this.currentAngle <  degree + (difference / 2))
                     || (degree - (difference / 2) < this.adjacentAngle) && (this.adjacentAngle <  degree + (difference / 2))) {
@@ -65,7 +57,7 @@ public class ClockSolver {
             }
         }
         catch (Exception e) {
-            System.out.println("Usage instructions: java Clocksolver <angle in degrees> <(optional)timeslice in seconds must be greater than 0 and less than 1800>");
+            System.out.println("Usage instructions: java Clocksolver <angle in degrees> <(optional)timeslice in seconds must be \n greater than 0 and less than 1800>");
         }
     }
 }
