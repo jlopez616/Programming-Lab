@@ -20,8 +20,6 @@ public class ClockSolver {
             difference = ANGLECHANGE * clock.getTimeSlice();
             this.currentAngle += difference;
 
-
-
             if (this.currentAngle > 360) {
                 this.currentAngle = this.currentAngle - 360;
             }
