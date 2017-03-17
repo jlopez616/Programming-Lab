@@ -20,6 +20,8 @@ public class ClockSolver {
             difference = ANGLECHANGE * clock.getTimeSlice();
             this.currentAngle += difference;
 
+
+
             if (this.currentAngle > 360) {
                 this.currentAngle = this.currentAngle - 360;
             }
@@ -28,6 +30,9 @@ public class ClockSolver {
             if ((degree - (difference / 2) < this.currentAngle) && (this.currentAngle <  degree + (difference / 2))
                     || (degree - (difference / 2) < this.adjacentAngle) && (this.adjacentAngle <  degree + (difference / 2))) {
                 System.out.println(clock.toString());
+                if (clock.getHours() == 12) {
+                    System.out.println("0:0:0.0");
+                }
             }
         }
     }
