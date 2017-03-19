@@ -10,14 +10,26 @@ public class BigInteger {
         this.numbers = new int[value.length()];
         for (int k = 0; k < value.length(); k++) {
             int intValue = Character.getNumericValue(value.charAt(k));
-            numbers[k] = intValue;
+            if (intValue <= 9) {
+                numbers[k] = intValue;
+            } else {
+                throw new IllegalArgumentException();
+            }
+
         }
     }
 
+
     public String toString() {
         String bigNumber = "";
+        Boolean zeroFilter = true;
         for (int k = 0; k < this.numbers.length; k++) {
-            bigNumber += Integer.toString(numbers[k]);
+            if (numbers[k] > 0) {
+                zeroFilter = false;
+            }
+            if (zeroFilter == false) {
+                bigNumber += Integer.toString(numbers[k]);
+            }
         }
         return bigNumber;
     }
