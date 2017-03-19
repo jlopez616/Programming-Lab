@@ -31,6 +31,9 @@ public class BigInteger {
                 bigNumber += Integer.toString(numbers[k]);
             }
         }
+        if ((numbers[0] == 0) && (this.numbers.length == 1)) {
+            bigNumber = "0";
+        }
         return bigNumber;
     }
 
