@@ -1,7 +1,7 @@
 public class BigInteger {
 
-    public static int[] numbers;
-    public static boolean isPositive = true;
+    public int[] numbers;
+    public boolean isPositive = true;
     /*public BigInteger() {
 
     } */
@@ -11,7 +11,7 @@ public class BigInteger {
         this.numbers = new int[value.length()];
         int intValue;
         for (int k = 0; k < value.length(); k++) {
-            if (value.charAt(k) == '-') {
+            if (value.charAt(0) == '-') {
                 this.isPositive = false;
             }
             intValue = Character.getNumericValue(value.charAt(k));
@@ -28,7 +28,7 @@ public class BigInteger {
     public boolean equals( Object x ) {
         boolean isSame = true;
         System.out.println(x.toString().length());
-            System.out.println(this.toString().length());
+        System.out.println(this.toString().length());
         if (x.toString().length() != this.toString().length()) {
             isSame = false;
         } else {
@@ -62,8 +62,7 @@ public class BigInteger {
             return "-" + bigNumber;
         } else {
             return bigNumber;
-        }
-
+        } 
     }
 
 
