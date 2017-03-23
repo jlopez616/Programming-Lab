@@ -68,6 +68,21 @@ public class BigInteger {
         }
     }
 
+    public BigInteger plus(BigInteger val) {
+        for (int k = 0; k < this.numbers.length / 2; k++) {
+            int temp = this.numbers[k];
+            this.numbers[k] = this.numbers[this.numbers.length - k - 1];
+            this.numbers[this.numbers.length - k - 1] = temp;
+        }
+        for (int k = 0; k < val.length / 2; k++) {
+            int temp = val.numbers[k];
+            val.numbers[k] = val.numbers[val.numbers.length - k - 1];
+            val.numbers[val.numbers.length - k - 1] = temp;
+        }
+
+        int[] sum = new int[];
+    }
+
 
 
     public static void main(String args[]) {
