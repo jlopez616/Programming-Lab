@@ -8,6 +8,7 @@ public class BigInteger {
 
     public BigInteger( String value ) {
 
+        value = value.trim();
         this.numbers = new int[value.length()];
         int intValue;
         for (int k = 0; k < value.length(); k++) {
@@ -27,8 +28,6 @@ public class BigInteger {
 
     public boolean equals( Object x ) {
         boolean isSame = true;
-        System.out.println(x.toString().length());
-        System.out.println(this.toString().length());
         if (x.toString().length() != this.toString().length()) {
             isSame = false;
         } else {
@@ -62,7 +61,7 @@ public class BigInteger {
             return "-" + bigNumber;
         } else {
             return bigNumber;
-        } 
+        }
     }
 
 
