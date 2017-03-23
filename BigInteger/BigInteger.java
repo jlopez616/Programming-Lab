@@ -6,6 +6,10 @@ public class BigInteger {
 
     } */
 
+    public static final BigInteger ZERO = new BigInteger("0");
+    public static final BigInteger ONE = new BigInteger("1");
+    public static final BigInteger TEN = new BigInteger("10");
+
     public BigInteger( String value ) {
 
         value = value.trim();
