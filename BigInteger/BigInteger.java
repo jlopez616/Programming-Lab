@@ -68,7 +68,43 @@ public class BigInteger {
         }
     }
 
-    public BigInteger plus(BigInteger val) {
+    public boolean greaterThan ( BigInteger val ) {
+
+        boolean isBigger = false;
+
+        if ((this.isPositive == true) && (val.isPositive != true)) {
+            isBigger = true;
+        } else if ((this.isPositive != true) && (val.isPositive == true)) {
+            isBigger = false;
+        } else if ((this.isPositive == true) && (val.isPositive == true)){
+            if ((this.toString().length() > val.toString().length())) {
+                isBigger = false;
+            } else if((this.toString().length() < val.toString().length())) {
+                isBigger = false;
+            } else {
+                for (int k = 0; k < this.toString().length(); k++) {
+                    if (this.toString().charAt(k) > val.toString().charAt(k)) {
+                        isBigger = true;
+                    }
+                }
+            }
+        } else {
+            if ((this.toString().length() < val.toString().length())) {
+                isBigger = true;
+            } else if((this.toString().length() > val.toString().length())) {
+                isBigger = false;
+            } else {
+                for (int k = 0; k < this.toString().length(); k++) {
+                    if (this.toString().charAt(k) < val.toString().charAt(k)) {
+                        isBigger = true;
+                    }
+            }
+        }
+        return isBigger;
+    }
+}
+
+/*    public BigInteger plus(BigInteger val) {
         for (int k = 0; k < this.numbers.length / 2; k++) {
             int temp = this.numbers[k];
             this.numbers[k] = this.numbers[this.numbers.length - k - 1];
@@ -81,7 +117,7 @@ public class BigInteger {
         }
 
         int[] sum = new int[];
-    }
+    } */
 
 
 
