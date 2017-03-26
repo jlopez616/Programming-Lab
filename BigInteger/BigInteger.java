@@ -31,18 +31,20 @@ public class BigInteger {
     }
 
     public boolean equals( Object x ) {
-        boolean isSame = true;
-        if (x.toString().length() != this.toString().length()) {
-            isSame = false;
-        } else {
-            for (int k = 0; k < x.toString().length(); k++) {
-                if (x.toString().charAt(k) != this.toString().charAt(k)) {
-                    isSame = false;
+        if (x.getClass() == this.getClass()) {
+            if (x.toString().length() != this.toString().length()) {
+                return false;
+            } else {
+                for (int k = 0; k < x.toString().length(); k++) {
+                    if (x.toString().charAt(k) != this.toString().charAt(k)) {
+                        return false;
+                    }
                 }
             }
+        return true;
+        } else {
+            throw new IllegalArgumentException(); //ask about this
         }
-
-        return isSame;
     }
 
 
@@ -148,7 +150,6 @@ public class BigInteger {
 
 
 
-
 /*    public BigInteger plus(BigInteger val) {
         for (int k = 0; k < this.numbers.length / 2; k++) {
             int temp = this.numbers[k];
@@ -169,7 +170,7 @@ public class BigInteger {
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
         BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.lessThan(test));
+        System.out.println(bigInt.equals(test));
 
     }
 
