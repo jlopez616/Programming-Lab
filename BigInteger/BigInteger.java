@@ -70,38 +70,38 @@ public class BigInteger {
 
     public boolean greaterThan ( BigInteger val ) {
 
-        boolean isBigger = false;
-
         if ((this.isPositive == true) && (val.isPositive != true)) {
-            isBigger = true;
+            return true;
         } else if ((this.isPositive != true) && (val.isPositive == true)) {
-            isBigger = false;
+            return false;
         } else if ((this.isPositive == true) && (val.isPositive == true)){
             if ((this.toString().length() > val.toString().length())) {
-                isBigger = false;
+                return true;
             } else if((this.toString().length() < val.toString().length())) {
-                isBigger = false;
+                return false;
             } else {
                 for (int k = 0; k < this.toString().length(); k++) {
                     if (this.toString().charAt(k) > val.toString().charAt(k)) {
-                        isBigger = true;
+                        System.out.println(this.toString().charAt(k) + " " + val.toString().charAt(k));
+                        return true;
                     }
                 }
+                return true;
             }
         } else {
             if ((this.toString().length() < val.toString().length())) {
-                isBigger = true;
+                return true;
             } else if((this.toString().length() > val.toString().length())) {
-                isBigger = false;
+                return false;
             } else {
                 for (int k = 0; k < this.toString().length(); k++) {
                     if (this.toString().charAt(k) < val.toString().charAt(k)) {
-                        isBigger = true;
+                        return true;
                     }
+                }
+                return false;
             }
         }
-        return isBigger;
-    }
 }
 
 /*    public BigInteger plus(BigInteger val) {
@@ -123,7 +123,8 @@ public class BigInteger {
 
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
-        System.out.println(bigInt.toString());
+        BigInteger test = new BigInteger(args[1]);
+        System.out.println(bigInt.greaterThan(test));
 
     }
 
