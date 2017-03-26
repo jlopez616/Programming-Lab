@@ -82,11 +82,12 @@ public class BigInteger {
             } else {
                 for (int k = 0; k < this.toString().length(); k++) {
                     if (this.toString().charAt(k) > val.toString().charAt(k)) {
-                        System.out.println(this.toString().charAt(k) + " " + val.toString().charAt(k));
                         return true;
+                    } else if (this.toString().charAt(k) < val.toString().charAt(k)) {
+                        return false;
                     }
                 }
-                return true;
+                return false;
             }
         } else {
             if ((this.toString().length() < val.toString().length())) {
@@ -97,12 +98,56 @@ public class BigInteger {
                 for (int k = 0; k < this.toString().length(); k++) {
                     if (this.toString().charAt(k) < val.toString().charAt(k)) {
                         return true;
+                    } else if (this.toString().charAt(k) > val.toString().charAt(k)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean lessThan ( BigInteger val ) {
+
+        if ((this.isPositive == true) && (val.isPositive != true)) {
+            return false;
+        } else if ((this.isPositive != true) && (val.isPositive == true)) {
+            return true;
+        } else if ((this.isPositive == true) && (val.isPositive == true)){
+            if ((this.toString().length() > val.toString().length())) {
+                return false;
+            } else if((this.toString().length() < val.toString().length())) {
+                return true;
+            } else {
+                for (int k = 0; k < this.toString().length(); k++) {
+                    if (this.toString().charAt(k) > val.toString().charAt(k)) {
+                        return false;
+                    } else if (this.toString().charAt(k) < val.toString().charAt(k)) {
+                        return true;
                     }
                 }
                 return false;
             }
+        } else {
+            if ((this.toString().length() < val.toString().length())) {
+                return false;
+            } else if((this.toString().length() > val.toString().length())) {
+                return true;
+            } else {
+                for (int k = 0; k < this.toString().length(); k++) {
+                    if (this.toString().charAt(k) < val.toString().charAt(k)) {
+                        return false;
+                    } else if (this.toString().charAt(k) > val.toString().charAt(k)) {
+                        return true;
+                    }
+                }
+            }
         }
-}
+        return false;
+    }
+
+
+
 
 /*    public BigInteger plus(BigInteger val) {
         for (int k = 0; k < this.numbers.length / 2; k++) {
@@ -124,7 +169,7 @@ public class BigInteger {
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
         BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.greaterThan(test));
+        System.out.println(bigInt.lessThan(test));
 
     }
 
