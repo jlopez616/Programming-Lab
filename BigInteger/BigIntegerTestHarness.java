@@ -12,11 +12,11 @@ public class BigIntegerTestHarness {
         test_toString();
         test_constants();
         test_Equals();
-        test_Plus();
+        //test_Plus();
 
         // You should implement:
-        //   test_greaterThan
-        //   test_lessThan
+        test_greaterThan();
+        test_lessThan();
         //   test_valueOf
         //   test_Minus
         //   test_Times
@@ -232,7 +232,7 @@ public class BigIntegerTestHarness {
         System.out.println("constants: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
 
     }
-
+ /*
     private static void test_Plus() {
         System.out.println("Testing plus...");
 
@@ -414,5 +414,153 @@ public class BigIntegerTestHarness {
         System.out.println("plus: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
 
     }
+*/
 
+private static void test_greaterThan() {
+    System.out.println("Testing Greater Than...");
+
+    int initialSuccesses = successes;
+    int initialAttempts = attempts;
+
+    try {
+        displaySuccessIfTrue(new BigInteger("123456789123456790")
+                .greaterThan(new BigInteger("123456789123456789")));
+    } catch (UnsupportedOperationException uoe) {
+        displayUnimplementedMethodFailure();
+    } catch(Exception e) {
+        displaySuccessIfTrue(false);
+    }
+
+    try {
+        displaySuccessIfTrue(!(new BigInteger("123456789123456789")
+                .greaterThan(new BigInteger("123456789123456789"))));
+    } catch (UnsupportedOperationException uoe) {
+        displayUnimplementedMethodFailure();
+    } catch(Exception e) {
+        displaySuccessIfTrue(false);
+    }
+
+    try {
+        displaySuccessIfTrue((new BigInteger("123456789123456789")
+                .greaterThan(new BigInteger("-123456789123456789"))));
+    } catch (UnsupportedOperationException uoe) {
+        displayUnimplementedMethodFailure();
+    } catch(Exception e) {
+        displaySuccessIfTrue(false);
+    }
+
+    try {
+        displaySuccessIfTrue(new BigInteger("123456789123456790")
+                .greaterThan(new BigInteger("000123456789123456789")));
+    } catch (UnsupportedOperationException uoe) {
+        displayUnimplementedMethodFailure();
+    } catch(Exception e) {
+        displaySuccessIfTrue(false);
+    }
+
+    try {
+        displaySuccessIfTrue(!(new BigInteger("-123456789123456789")
+                .greaterThan(new BigInteger("123456789123456789"))));
+    } catch (UnsupportedOperationException uoe) {
+        displayUnimplementedMethodFailure();
+    } catch(Exception e) {
+        displaySuccessIfTrue(false);
+    }
+
+    try {
+        displaySuccessIfTrue(!(new BigInteger("-123456789123456789")
+                .greaterThan(new BigInteger("123456789123456790"))));
+    } catch (UnsupportedOperationException uoe) {
+        displayUnimplementedMethodFailure();
+    } catch(Exception e) {
+        displaySuccessIfTrue(false);
+    }
+    try {
+        displaySuccessIfTrue(!(new BigInteger("-123456789123456789")
+                .greaterThan(new BigInteger("-123456789123456789"))));
+    } catch (UnsupportedOperationException uoe) {
+        displayUnimplementedMethodFailure();
+    } catch(Exception e) {
+        displaySuccessIfTrue(false);
+    }
+
+
+
+    System.out.println("equals: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+
+    }
+
+    private static void test_lessThan() {
+        System.out.println("Testing Less Than...");
+
+        int initialSuccesses = successes;
+        int initialAttempts = attempts;
+
+        try {
+            displaySuccessIfTrue(!(new BigInteger("123456789123456790")
+                    .lessThan(new BigInteger("123456789123456789"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(!(new BigInteger("123456789123456789")
+                    .lessThan(new BigInteger("123456789123456789"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-123456789123456789")
+                    .lessThan(new BigInteger("123456789123456789")));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            displaySuccessIfTrue(!(new BigInteger("-123456789123456789")
+                    .lessThan(new BigInteger("-123456789123456789"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("123456789123456789")
+                    .lessThan(new BigInteger("000123456789123456790")));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-123456789123456790")
+                    .lessThan(new BigInteger("123456789123456789")));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-123456789123456791")
+                    .lessThan(new BigInteger("-123456789123456790")));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+
+
+        System.out.println("equals: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+
+        }
 }
