@@ -148,29 +148,59 @@ public class BigInteger {
         return false;
     }
 
+   public void fillZeroes(BigInteger big) {
+
+       int[] placeHolder = this.numbers;
+
+       this.numbers = new int[big.numbers.length];
+
+       for (int k = 0; k < placeHolder.length; k++) {
+           this.numbers[k] = placeHolder[k];
+       }
 
 
-/*    public BigInteger plus(BigInteger val) {
+
+   }
+
+    public BigInteger plus(BigInteger val) {
+        //Reverses the array
+
+        System.out.println(this.numbers.length);
+        System.out.println(val.numbers.length);
+
+    /*    if (this.numbers.length > val.numbers.length) {
+            val.numbers[this.numbers.length + 1] = 0;
+        } else if (this.numbers.length < val.numbers.length) {
+            this.numbers[val.numbers.length + 1] = 0;
+        } */
+
+        System.out.println(this.numbers.length);
+        System.out.println(val.numbers.length);
+
         for (int k = 0; k < this.numbers.length / 2; k++) {
             int temp = this.numbers[k];
             this.numbers[k] = this.numbers[this.numbers.length - k - 1];
             this.numbers[this.numbers.length - k - 1] = temp;
         }
-        for (int k = 0; k < val.length / 2; k++) {
+        for (int k = 0; k < val.numbers.length / 2; k++) {
             int temp = val.numbers[k];
             val.numbers[k] = val.numbers[val.numbers.length - k - 1];
             val.numbers[val.numbers.length - k - 1] = temp;
         }
 
-        int[] sum = new int[];
-    } */
+
+        //worry about positive at first
+        return new BigInteger("0");
+    }
 
 
 
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
         BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.equals(test));
+        System.out.println(bigInt.toString());
+        bigInt.fillZeroes(test);
+        System.out.println(bigInt.toString());
 
     }
 
