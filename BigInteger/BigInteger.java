@@ -223,13 +223,71 @@ public class BigInteger {
         return sum;
     }
 
+    public BigInteger minus(BigInteger val) {
+        //Reverses the array
+        BigInteger difference = new BigInteger();
+
+        //System.out.println(this.toString());
+        //System.out.println(val.toString());
+
+
+        for (int k = 0; k < this.numbers.length / 2; k++) {
+            int temp = this.numbers[k];
+            this.numbers[k] = this.numbers[this.numbers.length - k - 1];
+            this.numbers[this.numbers.length - k - 1] = temp;
+        }
+        for (int k = 0; k < val.numbers.length / 2; k++) {
+            int temp = val.numbers[k];
+            val.numbers[k] = val.numbers[val.numbers.length - k - 1];
+            val.numbers[val.numbers.length - k - 1] = temp;
+        }
+
+        if (this.numbers.length > val.numbers.length) {
+            val.fillZeroes(this);
+        } else if (this.numbers.length < val.numbers.length) {
+            this.fillZeroes(val);
+        }
+
+        difference.numbers = new int[this.numbers.length + 1];
+        int carry;
+
+        System.out.println(this.toString());
+        System.out.println(val.toString());
+
+        for (int k = 0; k < difference.numbers.length - 1; k++) {
+            difference.numbers[k] += (this.numbers[k] - val.numbers[k]);
+            System.out.println("Difference: "+ difference.numbers[k]);
+            if (difference.numbers[k] < 0) {
+                difference.numbers[k] = difference.numbers[k] % 10;
+                System.out.println("Difference: "+ difference.numbers[k]);
+
+                carry = 10 + difference.numbers[k];
+               System.out.println("Carry: " + carry);
+
+                this.numbers[k + 1] += carry;
+
+            }
+        //    System.out.println(difference.toString());
+        }
+
+        for (int k = 0; k < difference.numbers.length / 2; k++) {
+            int temp = difference.numbers[k];
+            difference.numbers[k] = difference.numbers[difference.numbers.length - k - 1];
+            difference.numbers[difference.numbers.length - k - 1] = temp;
+        }
+
+        //System.out.println(difference.toString());
+
+        return difference;
+    }
+
 
 
 
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
         BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.plus(test).toString());
+        System.out.println(bigInt.minus(test).toString());
 
     }
 
