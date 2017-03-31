@@ -10,6 +10,9 @@ public class BigInteger {
     public static final BigInteger ONE = new BigInteger("1");
     public static final BigInteger TEN = new BigInteger("10");
 
+    public BigInteger() {
+    }
+
     public BigInteger( String value ) {
 
         value = value.trim();
@@ -157,25 +160,15 @@ public class BigInteger {
        for (int k = 0; k < placeHolder.length; k++) {
            this.numbers[k] = placeHolder[k];
        }
-
-
-
    }
 
     public BigInteger plus(BigInteger val) {
         //Reverses the array
+        BigInteger sum = new BigInteger();
 
-        System.out.println(this.numbers.length);
-        System.out.println(val.numbers.length);
+        System.out.println(this.toString());
+        System.out.println(val.toString());
 
-    /*    if (this.numbers.length > val.numbers.length) {
-            val.numbers[this.numbers.length + 1] = 0;
-        } else if (this.numbers.length < val.numbers.length) {
-            this.numbers[val.numbers.length + 1] = 0;
-        } */
-
-        System.out.println(this.numbers.length);
-        System.out.println(val.numbers.length);
 
         for (int k = 0; k < this.numbers.length / 2; k++) {
             int temp = this.numbers[k];
@@ -188,19 +181,55 @@ public class BigInteger {
             val.numbers[val.numbers.length - k - 1] = temp;
         }
 
+        if (this.numbers.length > val.numbers.length) {
+            val.fillZeroes(this);
+        } else if (this.numbers.length < val.numbers.length) {
+            this.fillZeroes(val);
+        }
 
-        //worry about positive at first
-        return new BigInteger("0");
+        System.out.println(this.toString());
+        System.out.println(val.toString());
+
+
+        sum.numbers = new int[this.numbers.length + 1];
+        int carry;
+
+
+        System.out.println(this.toString());
+        System.out.println(val.toString());
+        for (int k = 0; k < sum.numbers.length - 1; k++) {
+            sum.numbers[k] += this.numbers[k] + val.numbers[k];
+            System.out.println("Sum: "+ sum.numbers[k]);
+            if (sum.numbers[k] > 9) {
+                carry = sum.numbers[k] / 10;
+                System.out.println("Carry: " + carry);
+                sum.numbers[k] = sum.numbers[k] % 10;
+                System.out.println("Sum: "+ sum.numbers[k]);
+
+                sum.numbers[k + 1] += carry;
+
+            }
+            System.out.println(sum.toString());
+        }
+
+        for (int k = 0; k < sum.numbers.length / 2; k++) {
+            int temp = sum.numbers[k];
+            sum.numbers[k] = sum.numbers[sum.numbers.length - k - 1];
+            sum.numbers[sum.numbers.length - k - 1] = temp;
+        }
+
+        System.out.println(sum.toString());
+
+        return sum;
     }
+
 
 
 
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
         BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.toString());
-        bigInt.fillZeroes(test);
-        System.out.println(bigInt.toString());
+        System.out.println(bigInt.plus(test).toString());
 
     }
 
