@@ -162,18 +162,35 @@ public class BigInteger {
        }
    }
 
-   public BigInteger plus(BigInteger val) {
+   public BigInteger abs(){
+       if (!this.isPositive) {
+           this.numbers[0] = 0;
+           this.isPositive = true;
+           return this;
+       } else {
+           return this;
 
-       if (val.greaterThan(this)){
-           BigInteger placeHolder = new BigInteger(val.toString());
-           this.numbers = val.numbers;
-           val.numbers = placeHolder.numbers;
        }
+   }
+
+   public BigInteger plus(BigInteger val) {
+       if (val.greaterThan(this)) {
+           BigInteger placeHolder = new BigInteger(this.toString());
+           placeHolder.isPositive = this.isPositive;
+           System.out.println("Placeholder: " + placeHolder);
+           this.numbers = val.numbers;
+           this.isPositive = val.isPositive;
+           System.out.println(this.toString() + " = This");
+           val.numbers = placeHolder.numbers;
+           val.isPositive = placeHolder.isPositive;
+       }
+       System.out.println(this.toString() + " : " + val.toString());
 
        if ((this.isPositive == false) && (val.isPositive == false)) {
            return this.addTo(val);
        } else if ((this.isPositive == true) && (val.isPositive == false)) {
-           return this.subtractFrom(val);
+           val.isPositive = true;
+           return this.minus(val);
        } else {
            return this.addTo(val);
        }
@@ -184,6 +201,14 @@ public class BigInteger {
         //System.out.println(val.toString());
 
         BigInteger sum = new BigInteger();
+
+        if ((!this.isPositive) && (!val.isPositive)) {
+            sum.isPositive = false;
+            //this.isPositive = true;
+            this.numbers[0] = 0;
+            //val.isPositive = true;
+            val.numbers[0] = 0;
+        }
 
 
         for (int k = 0; k < this.numbers.length / 2; k++) {
@@ -197,6 +222,12 @@ public class BigInteger {
             val.numbers[val.numbers.length - k - 1] = temp;
         }
 
+        System.out.println("First:" + this.toString());
+        System.out.println("Second:" + val.toString());
+
+
+
+
         if (this.numbers.length > val.numbers.length) {
             val.fillZeroes(this);
         } else if (this.numbers.length < val.numbers.length) {
@@ -207,8 +238,14 @@ public class BigInteger {
         int carry;
 
         for (int k = 0; k < sum.numbers.length - 1; k++) {
-            sum.numbers[k] += this.numbers[k] + val.numbers[k];
-            System.out.println("Sum: "+ sum.numbers[k]);
+
+            /*if(val.numbers[k] == -1) {
+                val.numbers[k] = 0;
+            }*/
+            System.out.println("Top"  + this.numbers[k]);
+            System.out.println("Bottom" + val.numbers[k]);
+            sum.numbers[k] += (this.numbers[k] + val.numbers[k]);
+            System.out.println("Sum1: "+ sum.numbers[k]);
             if (sum.numbers[k] > 9) {
                 carry = sum.numbers[k] / 10;
                 System.out.println("Carry: " + carry);
@@ -228,6 +265,26 @@ public class BigInteger {
         }
 
         return sum;
+    }
+
+    public BigInteger minus(BigInteger val) {
+
+        if (val.greaterThan(this)){
+            BigInteger placeHolder = new BigInteger(this.toString());
+            placeHolder.isPositive = this.isPositive;
+            this.numbers = val.numbers;
+            this.isPositive = val.isPositive;
+            val.numbers = placeHolder.numbers;
+            val.isPositive = this.isPositive;
+        }
+
+        if ((this.isPositive == false) && (val.isPositive == false)) {
+            return this.subtractFrom(val);
+        } else if ((this.isPositive == true) && (val.isPositive == false)) {
+            return this.addTo(val);
+        } else {
+            return this.subtractFrom(val);
+        }
     }
 
     public BigInteger subtractFrom(BigInteger val) {
@@ -264,6 +321,10 @@ public class BigInteger {
 
         for (int k = 0; k < difference.numbers.length - 1; k++) {
 
+            if(val.numbers[k] == -1) {
+                val.numbers[k] = 0;
+            }
+
             if (this.numbers[k] < val.numbers[k]){
                 this.numbers[k] += 10;
                 this.numbers[k + 1] -= 1;
@@ -284,6 +345,9 @@ public class BigInteger {
 
         //System.out.println(difference.toString());
 
+        if (this.isPositive == true) {
+            difference.isPositive = true;
+        }
         return difference;
     }
 
@@ -293,7 +357,8 @@ public class BigInteger {
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
         BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.plus(test).toString());
+        System.out.println(bigInt.abs().toString());
+        //System.out.println(bigInt.plus(test).toString());
 
     }
 
