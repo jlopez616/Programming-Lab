@@ -162,12 +162,28 @@ public class BigInteger {
        }
    }
 
-    public BigInteger plus(BigInteger val) {
-        //Reverses the array
-        BigInteger sum = new BigInteger();
+   public BigInteger plus(BigInteger val) {
 
-        System.out.println(this.toString());
-        System.out.println(val.toString());
+       if (val.greaterThan(this)){
+           BigInteger placeHolder = new BigInteger(val.toString());
+           this.numbers = val.numbers;
+           val.numbers = placeHolder.numbers;
+       }
+
+       if ((this.isPositive == false) && (val.isPositive == false)) {
+           return this.addTo(val);
+       } else if ((this.isPositive == true) && (val.isPositive == false)) {
+           return this.subtractFrom(val);
+       } else {
+           return this.addTo(val);
+       }
+   }
+
+    public BigInteger addTo(BigInteger val) {
+        //System.out.println(this.toString());
+        //System.out.println(val.toString());
+
+        BigInteger sum = new BigInteger();
 
 
         for (int k = 0; k < this.numbers.length / 2; k++) {
@@ -187,16 +203,9 @@ public class BigInteger {
             this.fillZeroes(val);
         }
 
-        System.out.println(this.toString());
-        System.out.println(val.toString());
-
-
         sum.numbers = new int[this.numbers.length + 1];
         int carry;
 
-
-        System.out.println(this.toString());
-        System.out.println(val.toString());
         for (int k = 0; k < sum.numbers.length - 1; k++) {
             sum.numbers[k] += this.numbers[k] + val.numbers[k];
             System.out.println("Sum: "+ sum.numbers[k]);
@@ -218,14 +227,13 @@ public class BigInteger {
             sum.numbers[sum.numbers.length - k - 1] = temp;
         }
 
-        System.out.println(sum.toString());
-
         return sum;
     }
 
-    public BigInteger minus(BigInteger val) {
+    public BigInteger subtractFrom(BigInteger val) {
         //Reverses the array
         BigInteger difference = new BigInteger();
+
 
         //System.out.println(this.toString());
         //System.out.println(val.toString());
@@ -285,7 +293,7 @@ public class BigInteger {
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
         BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.minus(test).toString());
+        System.out.println(bigInt.plus(test).toString());
 
     }
 
