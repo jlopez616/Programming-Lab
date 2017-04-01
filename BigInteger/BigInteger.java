@@ -255,19 +255,17 @@ public class BigInteger {
         System.out.println(val.toString());
 
         for (int k = 0; k < difference.numbers.length - 1; k++) {
-            difference.numbers[k] += (this.numbers[k] - val.numbers[k]);
-            System.out.println("Difference: "+ difference.numbers[k]);
-            if (difference.numbers[k] < 0) {
-                difference.numbers[k] = difference.numbers[k] % 10;
-                System.out.println("Difference: "+ difference.numbers[k]);
 
-                carry = 10 + difference.numbers[k];
-               System.out.println("Carry: " + carry);
-
-                this.numbers[k + 1] += carry;
-
+            if (this.numbers[k] < val.numbers[k]){
+                this.numbers[k] += 10;
+                this.numbers[k + 1] -= 1;
+                difference.numbers[k] += (this.numbers[k] - val.numbers[k]);
+            } else {
+                difference.numbers[k] += (this.numbers[k] - val.numbers[k]);
             }
-        //    System.out.println(difference.toString());
+
+            System.out.println("Difference: "+ difference.numbers[k]);
+
         }
 
         for (int k = 0; k < difference.numbers.length / 2; k++) {
