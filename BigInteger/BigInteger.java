@@ -179,7 +179,8 @@ public class BigInteger {
    }
 
    public BigInteger plus(BigInteger val) {
-       if (abs(val).greaterThan(abs(this))) {
+
+ if (abs(val).greaterThan(abs(this))) {
            BigInteger placeHolder = new BigInteger(this.toString());
            placeHolder.isPositive = this.isPositive;
            //System.out.println("Placeholder: " + placeHolder);
@@ -202,6 +203,8 @@ public class BigInteger {
        } else {
            return this.addTo(val);
        }
+
+
    }
 
     public BigInteger addTo(BigInteger val) {
@@ -385,6 +388,50 @@ public class BigInteger {
         }
         //return difference;
     }
+
+
+    public BigInteger times (BigInteger val) {
+        /*BigInteger product = new BigInteger("24");
+
+        if (!this.isPositive && val.isPositive) {
+            product.isPositive = false;
+        } else if (this.isPositive && !val.isPositive) {
+            product.isPositive = false;
+        } else {
+            product.isPositive = true;
+        }
+
+        val = abs(val);
+        this = abs(this);
+
+        System.out.println(val.toString());
+
+        return product;
+
+        */
+
+        throw new UnsupportedOperationException();
+
+    }
+
+    public BigInteger divideBy( BigInteger val ) {
+        throw new UnsupportedOperationException();
+    }
+
+    public BigInteger remainder ( BigInteger val) {
+        throw new UnsupportedOperationException();
+    }
+
+    public static BigInteger valueOf ( long val ) {
+
+        String input =  String.valueOf(val);
+        return new BigInteger(input);
+
+
+      }
+
+
+
 
 
 
