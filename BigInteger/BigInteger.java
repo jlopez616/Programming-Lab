@@ -444,6 +444,16 @@ public class BigInteger {
         //return difference;
     }
 
+    public boolean isEven () {
+        BigInteger lower = this.minus(new BigInteger("1"));
+        BigInteger lowerDivideBy = lower.divideBy(new BigInteger("2"));
+        if (this.divideBy(new BigInteger("2")).equals(lowerDivideBy)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     public BigInteger times (BigInteger val) {
         BigInteger product = new BigInteger("24");
@@ -455,13 +465,22 @@ public class BigInteger {
         } else {
             product.isPositive = true;
         }
+        BigInteger a = new BigInteger(this.toString());
+        BigInteger b = abs(val);
 
-        this.numbers = abs(this).numbers;
-        this.isPositive = abs(this).isPositive;
-        val = abs(val);
+        BigInteger temp = new BigInteger();
 
+        while (a.greaterThan(new BigInteger("0"))) {
+            if (a.isEven()) {
+                a = a.divideBy(new BigInteger("2"));
+                b = b.times(new BigInteger("2"));
+            } else {
+                a = a.minus(new BigInteger("1"));
+                temp = b;
+            }
+        }
 
-        System.out.println(val.toString());
+        product = temp;
 
         return product;
 
@@ -472,7 +491,7 @@ public class BigInteger {
     }
 
     public BigInteger divideBy( BigInteger val ) {
-        BigInteger quotient = new BigInteger("24");
+        BigInteger quotient = new BigInteger();
 
         if (!this.isPositive && val.isPositive) {
             quotient.isPositive = false;
@@ -487,7 +506,20 @@ public class BigInteger {
         val = abs(val);
 
 
-        System.out.println(val.toString());
+        //System.out.println(val.toString());
+        BigInteger result = new BigInteger("1");
+        BigInteger intermediate = val;
+
+        if (val.greaterThan(this)) {
+            return new BigInteger("0");
+        } else {
+            while ( (intermediate.times( new BigInteger("10") ) ).lessThan(this)
+            || (intermediate.times( new BigInteger("10") ) ).equals(this)) {
+                intermediate = intermediate.times(new BigInteger("10"));
+                result = result.times(new BigInteger("10"));
+            }
+        }
+        quotient = (result.plus((this.minus(intermediate)).divideBy(val)));
 
         return quotient;
     }
@@ -513,7 +545,7 @@ public class BigInteger {
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
         BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.minus(test).toString());
+        System.out.println(bigInt.times(test).toString());
 
     }
 
