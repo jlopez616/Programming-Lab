@@ -445,12 +445,13 @@ public class BigInteger {
     }
 
     public boolean isEven () {
-        BigInteger lower = this.minus(new BigInteger("1"));
-        BigInteger lowerDivideBy = lower.divideBy(new BigInteger("2"));
-        if (this.divideBy(new BigInteger("2")).equals(lowerDivideBy)) {
-            return false;
-        } else {
+
+        if (this.numbers[this.numbers.length - 1] == 0 || this.numbers[this.numbers.length - 1] == 2
+        || this.numbers[this.numbers.length - 1] == 4 || this.numbers[this.numbers.length - 1] == 6 ||
+        this.numbers[this.numbers.length - 1] == 8) {
             return true;
+        } else {
+            return false;
         }
     }
 
@@ -544,8 +545,8 @@ public class BigInteger {
 
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
-        BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.times(test).toString());
+        //BigInteger test = new BigInteger(args[1]);
+        System.out.println(bigInt.isEven());
 
     }
 
