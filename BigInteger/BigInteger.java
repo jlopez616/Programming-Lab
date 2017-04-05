@@ -154,6 +154,7 @@ public class BigInteger {
 
    public void fillZeroes(BigInteger big) {
 
+
        int[] placeHolder = this.numbers;
        System.out.println("Smaller number length:" + this.numbers.length);
 
@@ -260,9 +261,9 @@ public class BigInteger {
 
 
 
-        if (this.numbers.length > val.numbers.length) {
+        if (abs(this).greaterThan(val)) {
             val.fillZeroes(this);
-        } else if (this.numbers.length < val.numbers.length) {
+        } else if (abs(val).greaterThan(this)) {
             this.fillZeroes(val);
         }
 
@@ -378,9 +379,9 @@ public class BigInteger {
 
 
 
-        if (this.greaterThan(val)) {
+        if (abs(this).greaterThan(val)) {
             val.fillZeroes(this);
-        } else if (val.greaterThan(this)) {
+        } else if (abs(val).greaterThan(this)) {
             this.fillZeroes(val);
         }
 
@@ -545,8 +546,8 @@ public class BigInteger {
 
     public static void main(String args[]) {
         BigInteger bigInt = new BigInteger(args[0]);
-        //BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.isEven());
+        BigInteger test = new BigInteger(args[1]);
+        System.out.println(bigInt.plus(test).toString());
 
     }
 
