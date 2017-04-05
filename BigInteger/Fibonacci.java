@@ -13,16 +13,20 @@ public class Fibonacci {
         if (val == 0) {
             return BigInteger.ZERO;
         } else {
-            return fib;
+            return b;
         }
     }
     public static void main(String[] args) {
-        int degree = Integer.parseInt(args[0]);
-        if (degree < 0) {
+        try {
+            int degree = Integer.parseInt(args[0]);
+            if (degree < 0) {
+                throw new Exception();
+            } else {
+                System.out.println(fib(degree).toString());
+            }
+        }
+        catch (Exception e) {
             System.out.println("Usage instructions: 'java Fibonacci <insert integer greater than or equal to zero>'");
-        } else {
-            System.out.println(fib(degree).toString());
-        };
-
+        }
     }
 }
