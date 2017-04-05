@@ -7,7 +7,6 @@ public class BigIntegerTestHarness {
         attempts = 0;
         successes = 0;
 
-        // Feel free to add more cases to these.
         test_Constructor();
         test_toString();
         test_constants();
@@ -15,7 +14,7 @@ public class BigIntegerTestHarness {
         test_Plus();
         test_greaterThan();
         test_lessThan();
-        //test_valueOf();
+        test_valueOf();
         test_Minus();
         //   test_Times
         //   test_IntegerDivision
@@ -703,7 +702,7 @@ private static void test_greaterThan() {
         System.out.println("less than: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
 
         }
-    /*private static void test_valueOf() {
+    private static void test_valueOf() {
         System.out.println("Testing value of...");
 
         int initialSuccesses = successes;
@@ -711,8 +710,8 @@ private static void test_greaterThan() {
 
         try {
             long test = 1;
-            BigInteger testOf = valueOf(test);
-            displaySuccessIfTrue("1".equals(testOf.toString()));
+            BigInteger testOf = new BigInteger(BigInteger.valueOf(test).toString());
+            displaySuccessIfTrue("1".equals(new BigInteger(testOf.toString())));
         } catch (UnsupportedOperationException uoe) {
             displayUnimplementedMethodFailure();
         } catch(Exception e) {
@@ -721,7 +720,8 @@ private static void test_greaterThan() {
 
         try {
             long test = -1;
-            displaySuccessIfTrue("-1".equals(valueOf(test).toString()));
+            BigInteger testOf = new BigInteger(BigInteger.valueOf(test).toString());
+            displaySuccessIfTrue("-1".equals(new BigInteger(testOf.toString())));
         } catch (UnsupportedOperationException uoe) {
             displayUnimplementedMethodFailure();
         } catch(Exception e) {
@@ -729,7 +729,8 @@ private static void test_greaterThan() {
         }
         try {
             long test = 0;
-            displaySuccessIfTrue("0".equals(valueOf(test).toString()));
+            BigInteger testOf = new BigInteger(BigInteger.valueOf(test).toString());
+            displaySuccessIfTrue("0".equals(new BigInteger(testOf.toString())));
         } catch (UnsupportedOperationException uoe) {
             displayUnimplementedMethodFailure();
         } catch(Exception e) {
@@ -737,7 +738,8 @@ private static void test_greaterThan() {
         }
         try {
             long test = 123456789;
-            displaySuccessIfTrue("123456789".equals(valueOf(test).toString()));
+            BigInteger testOf = new BigInteger(BigInteger.valueOf(test).toString());
+            displaySuccessIfTrue("123456789".equals(new BigInteger(testOf.toString())));
         } catch (UnsupportedOperationException uoe) {
             displayUnimplementedMethodFailure();
         } catch(Exception e) {
@@ -745,26 +747,17 @@ private static void test_greaterThan() {
         }
         try {
             long test = -123456789;
-            displaySuccessIfTrue("-123456789".equals(valueOf(test).toString()));
+            BigInteger testOf = new BigInteger(BigInteger.valueOf(test).toString());
+            displaySuccessIfTrue("-123456789".equals(new BigInteger(testOf.toString())));
         } catch (UnsupportedOperationException uoe) {
             displayUnimplementedMethodFailure();
         } catch(Exception e) {
             displaySuccessIfTrue(false);
         }
 
-        try {
-            Character a = 'a';
-            valueOf(a);
-            displaySuccessIfTrue(false);
-        } catch (UnsupportedOperationException uoe) {
-            displayUnimplementedMethodFailure();
-        } catch(Exception e) {
-            displaySuccessIfTrue(false);
-        }
 
         System.out.println("ValueOf: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
-    } */
-
+    }
 
 
 }
