@@ -12,13 +12,11 @@ public class BigIntegerTestHarness {
         test_toString();
         test_constants();
         test_Equals();
-        //test_Plus();
-
-        // You should implement:
+        test_Plus();
         test_greaterThan();
         test_lessThan();
-        //   test_valueOf
-        //   test_Minus
+        //test_valueOf();
+        test_Minus();
         //   test_Times
         //   test_IntegerDivision
         //   test_Remainder
@@ -232,7 +230,149 @@ public class BigIntegerTestHarness {
         System.out.println("constants: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
 
     }
- /*
+
+    private static void test_Minus() {
+        System.out.println("Testing minus...");
+
+        int initialSuccesses = successes;
+        int initialAttempts = attempts;
+
+        try {
+            displaySuccessIfTrue(new BigInteger("0").equals(new BigInteger("0").minus(new BigInteger("0"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-1").equals(new BigInteger("0").minus(new BigInteger("1"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("1").equals(new BigInteger("1").minus(new BigInteger("0"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("2").equals(new BigInteger("2").minus(new BigInteger("1"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-1000").equals(new BigInteger("1").minus(new BigInteger("1001"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-999").equals(new BigInteger("-876").minus(new BigInteger("123"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-1000").equals(new BigInteger("-123").minus(new BigInteger("877"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-1000").equals(new BigInteger("+3000").minus(new BigInteger("+4000"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("-1000").equals(new BigInteger("-4000").minus(new BigInteger("-3000"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("0").equals(new BigInteger("+1").minus(new BigInteger("+1"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("0").equals(new BigInteger("-1").minus(new BigInteger("-1"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("10").equals(new BigInteger("+11").minus(new BigInteger("+1"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue(new BigInteger("10").equals(new BigInteger("+12").minus(new BigInteger("2"))));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            BigInteger x = new BigInteger("+12354");
+            displaySuccessIfTrue(new BigInteger("0").equals(x.minus(x)));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue((new java.math.BigInteger("123456789123456789")).toString()
+                    .equals(new BigInteger("123456789123456789").minus(new BigInteger("0")).toString()));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            displaySuccessIfTrue("0".equals(new BigInteger("-123456789123456789")
+                    .minus(new BigInteger("-123456789123456789")).toString()));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+
+        System.out.println("Minus: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+
+    }
+
     private static void test_Plus() {
         System.out.println("Testing plus...");
 
@@ -414,7 +554,7 @@ public class BigIntegerTestHarness {
         System.out.println("plus: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
 
     }
-*/
+
 
 private static void test_greaterThan() {
     System.out.println("Testing Greater Than...");
@@ -486,7 +626,7 @@ private static void test_greaterThan() {
 
 
 
-    System.out.println("equals: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+    System.out.println("greater than: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
 
     }
 
@@ -560,7 +700,71 @@ private static void test_greaterThan() {
 
 
 
-        System.out.println("equals: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+        System.out.println("less than: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
 
         }
+    /*private static void test_valueOf() {
+        System.out.println("Testing value of...");
+
+        int initialSuccesses = successes;
+        int initialAttempts = attempts;
+
+        try {
+            long test = 1;
+            BigInteger testOf = valueOf(test);
+            displaySuccessIfTrue("1".equals(testOf.toString()));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            long test = -1;
+            displaySuccessIfTrue("-1".equals(valueOf(test).toString()));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            long test = 0;
+            displaySuccessIfTrue("0".equals(valueOf(test).toString()));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            long test = 123456789;
+            displaySuccessIfTrue("123456789".equals(valueOf(test).toString()));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+        try {
+            long test = -123456789;
+            displaySuccessIfTrue("-123456789".equals(valueOf(test).toString()));
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        try {
+            Character a = 'a';
+            valueOf(a);
+            displaySuccessIfTrue(false);
+        } catch (UnsupportedOperationException uoe) {
+            displayUnimplementedMethodFailure();
+        } catch(Exception e) {
+            displaySuccessIfTrue(false);
+        }
+
+        System.out.println("ValueOf: " + (successes - initialSuccesses) + "/" + (attempts - initialAttempts) + " passed");
+    } */
+
+
+
 }
