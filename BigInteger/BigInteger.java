@@ -2,9 +2,6 @@ public class BigInteger {
 
     public int[] numbers;
     public boolean isPositive = true;
-    /*public BigInteger() {
-
-    } */
 
     public static final BigInteger ZERO = new BigInteger("0");
     public static final BigInteger ONE = new BigInteger("1");
@@ -26,7 +23,6 @@ public class BigInteger {
             intValue = Character.getNumericValue(value.charAt(k));
             if (intValue <= 9) {
                 numbers[k] = intValue;
-                //System.out.println(intValue);
             } else {
                 throw new IllegalArgumentException();
             }
@@ -47,7 +43,7 @@ public class BigInteger {
             }
         return true;
         } else {
-            throw new IllegalArgumentException(); //ask about this
+            throw new IllegalArgumentException();
         }
     }
 
@@ -154,13 +150,9 @@ public class BigInteger {
 
    public void fillZeroes(BigInteger big) {
 
-
        int[] placeHolder = this.numbers;
-       System.out.println("Smaller number length:" + this.numbers.length);
 
        this.numbers = new int[big.numbers.length];
-       System.out.println("Smaller number length:" + this.numbers.length);
-
 
        for (int k = 0; k < placeHolder.length; k++) {
            this.numbers[k] = placeHolder[k];
@@ -168,7 +160,7 @@ public class BigInteger {
    }
 
    public BigInteger abs(BigInteger val){
-      // System.out.print("Before absolute value:" + val.toString());
+
        BigInteger falseThis = new BigInteger(val.toString());
        if (!val.isPositive) {
            BigInteger placeHolder = new BigInteger(val.toString());
@@ -177,7 +169,6 @@ public class BigInteger {
                falseThis.numbers[k] = placeHolder.numbers[k + 1];
            }
            falseThis.isPositive = true;
-            //System.out.print("After absolute value:" + falseThis.toString());
            return falseThis;
        } else {
            return val;
@@ -186,31 +177,22 @@ public class BigInteger {
    }
 
    public BigInteger plus(BigInteger val) {
-
-        //System.out.println("1. Abs of Inverse: " + val.toString());
-
         BigInteger value = new BigInteger(val.toString());
 
     if (abs(value).greaterThan(abs(this))) {
            BigInteger placeHolder = new BigInteger(this.toString());
            placeHolder.isPositive = this.isPositive;
-         //  System.out.println("2. Abs of Inverse: " + val.toString());
            this.numbers = value.numbers;
            this.isPositive = value.isPositive;
-           //System.out.println(this.toString() + " = This");
            value.numbers = placeHolder.numbers;
            value.isPositive = placeHolder.isPositive;
-        //  System.out.println("Option 1: " + this.toString() + " : " + val.toString());
     } else if ((abs(value).equals(abs(this))) && (!this.isPositive)) {
            BigInteger placeHolder = new BigInteger(this.toString());
            placeHolder.isPositive = this.isPositive;
-           //System.out.println("Placeholder: " + placeHolder);
            this.numbers = value.numbers;
            this.isPositive = value.isPositive;
-           //System.out.println(this.toString() + " = This");
            value.numbers = placeHolder.numbers;
            value.isPositive = placeHolder.isPositive;
-    //    System.out.println("Option 2: " + this.toString() + " : " + val.toString());
 }
 
        if ((this.isPositive == false) && (value.isPositive == false)) {
@@ -224,22 +206,14 @@ public class BigInteger {
        } else {
            return this.addTo(value);
        }
-
-
    }
 
     public BigInteger addTo(BigInteger val) {
-        //System.out.println(this.toString());
-        //System.out.println(val.toString());
-
-
         BigInteger sum = new BigInteger();
 
         if ((!this.isPositive) && (!val.isPositive)) {
             sum.isPositive = false;
-            //this.isPositive = true;
             this.numbers[0] = 0;
-            //val.isPositive = true;
             val.numbers[0] = 0;
         }
 
@@ -254,12 +228,6 @@ public class BigInteger {
             val.numbers[k] = val.numbers[val.numbers.length - k - 1];
             val.numbers[val.numbers.length - k - 1] = temp;
         }
-
-        // System.out.println("First:" + this.toString());
-        // System.out.println("Second:" + val.toString());
-
-
-
 
         if (abs(this).greaterThan(val)) {
             val.fillZeroes(this);
@@ -278,21 +246,14 @@ public class BigInteger {
             if(val.numbers[k] == -1) {
                 val.numbers[k] = 0;
             }
-            //System.out.println("Top"  + this.numbers[k]);
-            //System.out.println("Bottom" + val.numbers[k]);
+
             sum.numbers[k] += (this.numbers[k] + val.numbers[k]);
             if (sum.numbers[k] > 9) {
                 carry = sum.numbers[k] / 10;
-                //System.out.println("Carry: " + carry);
                 sum.numbers[k] = sum.numbers[k] % 10;
-                //System.out.println("Sum: "+ sum.numbers[k]);
-
                 sum.numbers[k + 1] += carry;
 
             }
-            // System.out.println("Sum1: "+ sum.numbers[k]);
-            // System.out.println("Sum String:" + sum.toString());
-
         }
 
         for (int k = 0; k < sum.numbers.length / 2; k++) {
@@ -312,72 +273,24 @@ public class BigInteger {
 
         BigInteger inverse = new BigInteger(val.toString());
         inverse.isPositive = !inverse.isPositive;
-        System.out.println("Inverse: " + inverse.toString());
 
         return this.plus(inverse);
-
-
-
-        /* if (abs(val).greaterThan(abs(this))){
-            BigInteger placeHolder = new BigInteger(this.toString());
-            placeHolder.isPositive = this.isPositive;
-            this.numbers = val.numbers;
-            this.isPositive = val.isPositive;
-            val.numbers = placeHolder.numbers;
-            val.isPositive = this.isPositive;
-            System.out.println("Minus Option 1: " + this.toString() + " : " + val.toString());
-        }  /*else if ((abs(val).equals(abs(this))) && (!this.isPositive)) {
-            BigInteger placeHolder = new BigInteger(this.toString());
-            placeHolder.isPositive = this.isPositive;
-            //System.out.println("Placeholder: " + placeHolder);
-            this.numbers = val.numbers;
-            this.isPositive = val.isPositive;
-            //System.out.println(this.toString() + " = This");
-            val.numbers = placeHolder.numbers;
-            val.isPositive = placeHolder.isPositive;
-         System.out.println("Option 2: " + this.toString() + " : " + val.toString());
- } */
-
-        /*if ((this.isPositive == false) && (val.isPositive == false)) {
-            return this.subtractFrom(val);
-        } else if ((this.isPositive == true) && (val.isPositive == false)) {
-            return this.plus(val);
-        } else if ((this.isPositive == false) && (val.isPositive == true)){
-            return this.plus(val);
-        } else {
-            return this.subtractFrom(val);
-        } */
-        //return this.subtractFrom(val);
     }
 
     public BigInteger subtractFrom(BigInteger val) {
-        //Reverses the array
+
         BigInteger difference = new BigInteger();
-
-
-
-        // System.out.println("Top" + this.toString());
-        // System.out.println("Bottom " + val.toString());
-
 
         for (int k = 0; k < this.numbers.length / 2; k++) {
             int temp = this.numbers[k];
             this.numbers[k] = this.numbers[this.numbers.length - k - 1];
             this.numbers[this.numbers.length - k - 1] = temp;
-            System.out.println("The current number: " + Integer.toString(temp));
         }
         for (int k = 0; k < val.numbers.length / 2; k++) {
             int temp = val.numbers[k];
             val.numbers[k] = val.numbers[val.numbers.length - k - 1];
             val.numbers[val.numbers.length - k - 1] = temp;
-            System.out.println("The current number: " + Integer.toString(temp));
         }
-
-
-        // System.out.println("After zero Top" + this.toString());
-        // System.out.println("After zero Bottom " + val.toString());
-
-
 
         if (abs(this).greaterThan(val)) {
             val.fillZeroes(this);
@@ -385,17 +298,8 @@ public class BigInteger {
             this.fillZeroes(val);
         }
 
-        System.out.println("After zero Top" + this.toString());
-        System.out.println("After zero Bottom " + val.toString());
-
-
         difference.numbers = new int[this.numbers.length + 1];
         int carry;
-
-        //  System.out.println(this.toString());
-        //  System.out.println(val.toString());
-        System.out.println("Top" + this.toString());
-        // System.out.println("Bottom " + val.toString());
 
         for (int k = 0; k < difference.numbers.length - 1; k++) {
 
@@ -410,39 +314,23 @@ public class BigInteger {
             } else {
                 difference.numbers[k] += (this.numbers[k] - val.numbers[k]);
             }
-
-
-
         }
-
-    //    System.out.println(difference.toString());
 
         for (int k = 0; k < difference.numbers.length / 2; k++) {
             int temp = difference.numbers[k];
             difference.numbers[k] = difference.numbers[difference.numbers.length - k - 1];
             difference.numbers[difference.numbers.length - k - 1] = temp;
-
         }
-
-        //System.out.println("Difference: "+ difference.numbers[0]);
-
 
         if (abs(this).greaterThan(abs(val))) {
             difference.isPositive = this.isPositive;
         }
 
-    /*if (val.greaterThan(this)) {
-        difference.isPositive = !this.isPositive;
-    } */
         if ((difference.numbers[1] == 0) && (difference.numbers[difference.numbers.length - 1] == 0)) {
-        //    System.out.println(difference.numbers[1]);
-            //System.out.println(difference.numbers[difference.numbers.length - 1]);
             return ZERO;
         } else {
-            System.out.println(difference.isPositive);
             return new BigInteger(difference.toString());
         }
-        //return difference;
     }
 
     public boolean isEven () {
@@ -458,7 +346,7 @@ public class BigInteger {
 
 
     public BigInteger times (BigInteger val) {
-        BigInteger product = new BigInteger("24");
+        BigInteger product = new BigInteger();
 
         if (!this.isPositive && val.isPositive) {
             product.isPositive = false;
@@ -467,6 +355,7 @@ public class BigInteger {
         } else {
             product.isPositive = true;
         }
+
         BigInteger a = new BigInteger(this.toString());
         BigInteger b = abs(val);
 
@@ -484,12 +373,11 @@ public class BigInteger {
 
         product = temp;
 
-        return product;
-
-
-
-    //    throw new UnsupportedOperationException();
-
+        if (product == new BigInteger("1")) {
+            return product;
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     public BigInteger divideBy( BigInteger val ) {
@@ -502,13 +390,10 @@ public class BigInteger {
         } else {
             quotient.isPositive = true;
         }
-
         this.numbers = abs(this).numbers;
         this.isPositive = abs(this).isPositive;
         val = abs(val);
 
-
-        //System.out.println(val.toString());
         BigInteger result = new BigInteger("1");
         BigInteger intermediate = val;
 
@@ -523,7 +408,11 @@ public class BigInteger {
         }
         quotient = (result.plus((this.minus(intermediate)).divideBy(val)));
 
-        return quotient;
+        if (quotient == new BigInteger("1")) {
+            return quotient;
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 
     public BigInteger remainder ( BigInteger val) {
@@ -535,20 +424,5 @@ public class BigInteger {
         String input =  String.valueOf(val);
         return new BigInteger(input);
 
-
       }
-
-
-
-
-
-
-
-    public static void main(String args[]) {
-        BigInteger bigInt = new BigInteger(args[0]);
-        BigInteger test = new BigInteger(args[1]);
-        System.out.println(bigInt.plus(test).toString());
-
-    }
-
 }
