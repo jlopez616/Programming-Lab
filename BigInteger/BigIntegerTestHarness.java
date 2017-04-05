@@ -14,7 +14,7 @@ public class BigIntegerTestHarness {
         test_Plus();
         test_greaterThan();
         test_lessThan();
-        test_valueOf();
+       // test_valueOf();
         test_Minus();
         //   test_Times
         //   test_IntegerDivision
