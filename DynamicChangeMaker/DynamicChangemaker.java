@@ -58,6 +58,19 @@ public class DynamicChangemaker {
     }
 
     public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int amount) {
+
+        Tuple[][] table = new Tuple[denominations.length][amount + 1];
+
+        //make the loops and apply the makeChangeWithDynamicProgramming
+        for (int row = 0; row < table.length; row++) {
+            for (int column = 0; column < table[row].length; column++) {
+                table[row][column] = new Tuple(denominations.length);
+            /*    if (column != 0) {
+
+            } */
+            }
+        }
+        //return the last tuple in the table
         return Tuple.IMPOSSIBLE;
     }
 
