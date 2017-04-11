@@ -85,7 +85,9 @@ public class DynamicChangemaker {
                         }
                     }
                 }
+                System.out.println("Row: " + row + " Column: " + column + " Tuple: " + table[row][column].toString());
             }
+        //    System.out.println(table[row].toString());
         }
         //return the last tuple in the table
         return table[denominations.length - 1][amount];
