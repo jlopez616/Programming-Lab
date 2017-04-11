@@ -67,8 +67,13 @@ public class DynamicChangemaker {
                 table[row][column] = new Tuple(denominations.length);
                 if (column > 0) {
                     if ((column - denominations[row]) >= 0 ) {
-                        table[row][column].setElement(row, column);
-                        table[row][column] = table[row][column].add(table[row][column -  1]);
+                        table[row][column].setElement(row, 1);
+                        if (!table[row][column - denominations[row]].isImpossible()) {
+                            table[row][column] = table[row][column].add(table[row][column - denominations[row]]);
+                        }
+                        /*for (int solution = 0; solution < table[row][column -  1].length(); solution ++) {
+                            table[row][column] = table[row][column].add(table[row][column]);
+                        } */
 
                     } else {
                         table[row][column] = Tuple.IMPOSSIBLE;
@@ -83,7 +88,7 @@ public class DynamicChangemaker {
             }
         }
         //return the last tuple in the table
-        return Tuple.IMPOSSIBLE;
+        return table[denominations.length - 1][amount];
     }
 
     private static void printUsage() {
@@ -94,13 +99,6 @@ public class DynamicChangemaker {
 
     private static String getSimplePluralSuffix(int count) {
         return count == 1 ? "" : "s";
-    }
-
-    public static void main(String[] args) {
-        int[] denominations = args[0_]
-        int amount = Integer.parseInt(args[1]);
-        System.out.println(denominations.toString + " " + amount);
-
     }
 
 
