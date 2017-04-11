@@ -66,6 +66,7 @@ public class DynamicChangemaker {
             for (int column = 0; column < table[row].length; column++) {
                 table[row][column] = new Tuple(denominations.length);
                 if (column > 0) {
+
                     if ((column - denominations[row]) >= 0 ) {
                         table[row][column].setElement(row, 1);
                         if (!table[row][column - denominations[row]].isImpossible()) {
@@ -80,7 +81,7 @@ public class DynamicChangemaker {
                     }
 
                     if (row > 0) {
-                        if (table[row - 1][column].length() < table[row][column].length()) {
+                        if ((table[row - 1][column].length() < table[row][column].length()) || (table[row][column].isImpossible())) {
                             table[row][column] = table[row - 1][column];
                         }
                     }
