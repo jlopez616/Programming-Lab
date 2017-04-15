@@ -31,15 +31,17 @@ public class DynamicChangemakerTestHarness {
 
         Tuple result = DynamicChangemaker.makeChangeWithDynamicProgramming(keckel_Denominations, 99);
 
+        System.out.println("Testing Keckel Denominations...");
+
         try {
-            displaySuccessIfTrue(0 == result.getElement(0));
+            displaySuccessIfTrue(2 == result.getElement(0));
         } catch (Exception e) {
             e.printStackTrace();
             displayFailure();
         }
 
         try {
-            displaySuccessIfTrue(2 == result.getElement(1));
+            displaySuccessIfTrue(1 == result.getElement(1));
         } catch (Exception e) {
             e.printStackTrace();
             displayFailure();
@@ -71,6 +73,8 @@ public class DynamicChangemakerTestHarness {
         int[] sFDenominations = new int[] { 5, 10, 20, 50 };
 
         Tuple result = DynamicChangemaker.makeChangeWithDynamicProgramming(sFDenominations, 95);
+
+        System.out.println("Testing Swiss Franc Denominations...");
 
         try {
             displaySuccessIfTrue(1 == result.getElement(0));
@@ -105,6 +109,8 @@ public class DynamicChangemakerTestHarness {
         int[] euroDenominations = new int[] { 1, 2, 5, 10, 20, 50 };
 
         Tuple result = DynamicChangemaker.makeChangeWithDynamicProgramming(euroDenominations, 99);
+
+        System.out.println("Testing Euro Denominations...");
 
         try {
             displaySuccessIfTrue(0 == result.getElement(0));
@@ -154,6 +160,8 @@ public class DynamicChangemakerTestHarness {
         int[] usaDenominations = new int[] { 25, 10, 5, 1 };
 
         Tuple result = DynamicChangemaker.makeChangeWithDynamicProgramming(usaDenominations, 99);
+        System.out.println("Testing USA Denominations...");
+
         try {
             displaySuccessIfTrue(3 == result.getElement(0));
         } catch (Exception e) {
