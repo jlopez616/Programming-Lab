@@ -73,25 +73,24 @@ public class MazeWalker {
     public WalkerState areWeThereYet(int currentX, int currentY) {
         // Implement me!
         beenThere[currentY][currentX] = true;
-        if (maze.getLocation(currentX, currentY).getAbove().isOpen()) {
+        if ((maze.getLocation(currentX, currentY).getAbove().isOpen()) && (!beenThere[currentY - 1][currentX])) {
             pathIndex++;
             path[pathIndex] = WalkerState.MOVE_UP;
             return WalkerState.MOVE_UP;
-        } else if (maze.getLocation(currentX, currentY).getLeft().isOpen()){
+        } else if ((maze.getLocation(currentX, currentY).getLeft().isOpen()) && (!beenThere[currentY][currentX - 1])){
             pathIndex++;
             path[pathIndex] = WalkerState.MOVE_LEFT;
             return WalkerState.MOVE_LEFT;
-        } else if (maze.getLocation(currentX, currentY).getRight().isOpen()){
+        } else if ((maze.getLocation(currentX, currentY).getRight().isOpen()) && (!beenThere[currentY + 1][currentX])){
             pathIndex++;
-            path[pathIndex] = WalkerState.MOVE_LEFT;
+            path[pathIndex] = WalkerState.MOVE_DOWN;
             return WalkerState.MOVE_DOWN;
-        } else if (maze.getLocation(currentX, currentY).getRight().isOpen()){
+        } else if ((maze.getLocation(currentX, currentY).getRight().isOpen()) && (!beenThere[currentY][currentX + 1])){
             pathIndex++;
             path[pathIndex] = WalkerState.MOVE_RIGHT;
             return WalkerState.MOVE_RIGHT;
         } else {
-            pathIndex--;
-            return WalkerState.MOVE_DOWN;
+            return WalkerState.IMPOSSIBLE_TO_GET_THERE;
         }
 
     }
