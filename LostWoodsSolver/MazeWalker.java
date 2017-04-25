@@ -75,15 +75,24 @@ public class MazeWalker {
 
 
         if (maze.getLocation(currentX, currentY).getAbove().isOpen()) {
+            pathIndex++;
+            path[pathIndex] = WalkerState.MOVE_UP;
             return WalkerState.MOVE_UP;
         } else if (maze.getLocation(currentX, currentY).getLeft().isOpen()){
+            pathIndex++;
+            path[pathIndex] = WalkerState.MOVE_LEFT;
             return WalkerState.MOVE_LEFT;
-        } else if (maze.getLocation(currentX, currentY).getBelow().isOpen()){
+        } else if (maze.getLocation(currentX, currentY).getRight().isOpen()){
+            pathIndex++;
+            path[pathIndex] = WalkerState.MOVE_LEFT;
             return WalkerState.MOVE_DOWN;
         } else if (maze.getLocation(currentX, currentY).getRight().isOpen()){
+            pathIndex++;
+            path[pathIndex] = WalkerState.MOVE_RIGHT;
             return WalkerState.MOVE_RIGHT;
         } else {
-            return WalkerState.IMPOSSIBLE_TO_GET_THERE;
+            pathIndex--;
+            return path[pathIndex + 1];
         }
 
     }
