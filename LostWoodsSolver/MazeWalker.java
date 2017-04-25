@@ -72,7 +72,20 @@ public class MazeWalker {
      */
     public WalkerState areWeThereYet(int currentX, int currentY) {
         // Implement me!
-        return WalkerState.IMPOSSIBLE_TO_GET_THERE;
+
+
+        if (maze.getLocation(currentX, currentY).getAbove().isOpen()) {
+            return WalkerState.MOVE_UP;
+        } else if (maze.getLocation(currentX, currentY).getLeft().isOpen()){
+            return WalkerState.MOVE_LEFT;
+        } else if (maze.getLocation(currentX, currentY).getBelow().isOpen()){
+            return WalkerState.MOVE_DOWN;
+        } else if (maze.getLocation(currentX, currentY).getRight().isOpen()){
+            return WalkerState.MOVE_RIGHT;
+        } else {
+            return WalkerState.IMPOSSIBLE_TO_GET_THERE;
+        }
+
     }
 
     /**
