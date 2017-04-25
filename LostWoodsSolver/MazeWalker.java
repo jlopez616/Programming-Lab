@@ -72,8 +72,7 @@ public class MazeWalker {
      */
     public WalkerState areWeThereYet(int currentX, int currentY) {
         // Implement me!
-
-
+        beenThere[currentY][currentX] = true;
         if (maze.getLocation(currentX, currentY).getAbove().isOpen()) {
             pathIndex++;
             path[pathIndex] = WalkerState.MOVE_UP;
@@ -92,7 +91,7 @@ public class MazeWalker {
             return WalkerState.MOVE_RIGHT;
         } else {
             pathIndex--;
-            return path[pathIndex + 1];
+            return WalkerState.MOVE_DOWN;
         }
 
     }
