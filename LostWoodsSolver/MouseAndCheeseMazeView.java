@@ -28,7 +28,8 @@ public class MouseAndCheeseMazeView extends JPanel {
     /**
      * Creates the MazeSolverView.
      */
-    public MouseAndCheeseMazeView(MouseAndCheeseMaze mouseAndCheeseMaze) {
+
+    public MouseAndCheeseMazeView(MouseAndCheeseMaze mouseAndCheeseMaze, int speed) {
         this.mouseAndCheeseMaze = mouseAndCheeseMaze;
         startX = this.mouseAndCheeseMaze.getMouse().x;
         startY = this.mouseAndCheeseMaze.getMouse().y;
@@ -42,7 +43,7 @@ public class MouseAndCheeseMazeView extends JPanel {
             }
         };
 
-        solverTimer = new Timer(500, new ActionListener() {
+        solverTimer = new Timer(500 / speed, new ActionListener() {
             /**
              * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
              */
