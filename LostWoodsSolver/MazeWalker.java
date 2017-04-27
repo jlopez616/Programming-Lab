@@ -74,7 +74,9 @@ public class MazeWalker {
         // Implement me!
         beenThere[currentY][currentX] = true;
         moveTally++;
-        if ((maze.getLocation(currentX, currentY).getAbove().isOpen()) && (!beenThere[currentY - 1][currentX])) {
+        if ((currentX == destinationX) && (currentY == destinationY)) {
+            return WalkerState.THERE_ALREADY;
+        } else if ((maze.getLocation(currentX, currentY).getAbove().isOpen()) && (!beenThere[currentY - 1][currentX])) {
             pathIndex++;
             path[pathIndex] = WalkerState.MOVE_UP;
             return WalkerState.MOVE_UP;
@@ -90,7 +92,7 @@ public class MazeWalker {
             pathIndex++;
             path[pathIndex] = WalkerState.MOVE_RIGHT;
             return WalkerState.MOVE_RIGHT;
-        } else {
+        } else if (pathIndex != -1) {
             if (path[pathIndex] == WalkerState.MOVE_UP) {
                 pathIndex--;
                 return WalkerState.MOVE_DOWN;
@@ -100,13 +102,14 @@ public class MazeWalker {
             } else if (path[pathIndex] == WalkerState.MOVE_RIGHT) {
                 pathIndex--;
                 return WalkerState.MOVE_LEFT;
-            } else if (path[pathIndex] == WalkerState.MOVE_DOWN) {
+            } else {
                 pathIndex--;
                 return WalkerState.MOVE_UP;
-            } else {
-                return WalkerState.IMPOSSIBLE_TO_GET_THERE;
             }
-        } 
+        } else {
+            return WalkerState.IMPOSSIBLE_TO_GET_THERE;
+        }
+
 
     }
 
