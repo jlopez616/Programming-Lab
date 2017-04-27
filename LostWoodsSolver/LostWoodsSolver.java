@@ -18,17 +18,26 @@ public class LostWoodsSolver {
      */
     public static void main(String[] args) {
         // Process the arguments.
-        if (args.length != 4) {
+        if ((args.length < 4) || (args.length > 5)) {
             displayUsageMessage();
             return;
         }
 
         try {
             // Parse the arguments.
+            int mouseSpeed = 1;
             int mouseX = Integer.parseInt(args[0]);
             int mouseY = Integer.parseInt(args[1]);
             int cheeseX = Integer.parseInt(args[2]);
             int cheeseY = Integer.parseInt(args[3]);
+            if (args.length == 5) {
+                if (Integer.parseInt(args[4]) > 0) {
+                     mouseSpeed = Integer.parseInt(args[4]);
+                } else {
+                    displayUsageMessage();
+                    return;
+                }
+            }
 
             // Grab the maze description.
             Scanner scanner = new Scanner(System.in);
@@ -46,7 +55,7 @@ public class LostWoodsSolver {
 
             // Create the window for the maze solver, then open it.
             JFrame f = new JFrame("LostWoodsSolver");
-            f.setContentPane(new MouseAndCheeseMazeView(mouseAndCheeseMaze));
+            f.setContentPane(new MouseAndCheeseMazeView(mouseAndCheeseMaze, mouseSpeed));
             f.pack();
             f.setLocationByPlatform(true);
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,7 +77,7 @@ public class LostWoodsSolver {
      * Displays a usage message.
      */
     private static void displayUsageMessage() {
-        System.out.println("Usage: java LostWoodsSolver <Link x> <Link y> <sword x> <sword y>");
+        System.out.println("Usage: java LostWoodsSolver <Link x> <Link y> <sword x> <sword y> <optional input: speed>");
         System.out.println();
         System.out.println("The program then reads the maze to use through standard input.  For maximum");
         System.out.println("convenience, provide this maze using redirection from a text file:");
@@ -78,5 +87,7 @@ public class LostWoodsSolver {
         System.out.println("All x-coordinates must range from 0 to the width of the given maze - 1 while");
         System.out.println("all y-coordinates must range from 0 to the height of the given maze - 1.");
         System.out.println("Coordinates must also refer to open cells within the maze.");
+        System.out.println("By default, the speed will be 1 if nothing is declared.");
+        System.out.println("The speed must be an integer greater than zero.");
     }
 }
